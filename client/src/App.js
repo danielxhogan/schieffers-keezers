@@ -25,7 +25,24 @@ const App = () => {
 
   const [authenticated, setAuthenticated] = useState(false);
 
+  const checkAuthentication = async () => {
+    try {
+      const response = await fetch(BASE_URL + '/auth/verify', {
+                                   method: 'GET',
+                                   headers: {token: localStorage.token}
+                                   });
 
+    const parseRes = await response.json();
+    parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
+
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  useEffect(() => {
+    checkAuthentication();
+  })
 
 
   return <>

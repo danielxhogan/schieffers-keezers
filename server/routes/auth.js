@@ -74,7 +74,7 @@ router.get('/verify', authorization, async (req, res) => {
   // request object and this route sends it back to the client.
 
   try {
-    res.json(req.user_id);
+    res.json(true);
     
   } catch (err) {
     console.log(err.message);
