@@ -23,7 +23,7 @@ const Nav = (props) => {
           When authenticated this will display the users name as a button with a
           drop down menu with cart, account details, and logout buttons */}
 
-      {props.authenticated ? <UserDropdown /> : <LoginRegister />}
+      {props.authenticated ? <UserDropdown setAuth={props.setAuth}/> : <LoginRegister />}
 
 
     </header>

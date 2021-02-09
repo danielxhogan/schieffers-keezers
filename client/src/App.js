@@ -23,30 +23,34 @@ const BASE_URL = 'http://localhost:3001';
 // *****************************************************************************************
 const App = () => {
 
-  const [authenticated, setAuthenticated] = useState(!false);
+  const [authenticated, setAuthenticated] = useState(false);
 
-  // const checkAuthentication = async () => {
-  //   try {
-  //     const response = await fetch(BASE_URL + '/auth/verify', {
-  //                                  method: 'GET',
-  //                                  headers: {token: localStorage.token}
-  //                                  });
+  const setAuth = boolean => {
+    setAuthenticated(boolean);
+  };
 
-  //   const parseRes = await response.json();
-  //   parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
+  const checkAuthentication = async () => {
+    try {
+      const response = await fetch(BASE_URL + '/auth/verify', {
+                                   method: 'GET',
+                                   headers: {token: localStorage.token}
+                                   });
 
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // }
+    const parseRes = await response.json();
+    parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
 
-  // useEffect(() => {
-  //   checkAuthentication();
-  // })
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  useEffect(() => {
+    checkAuthentication();
+  })
 
 
   return <>
-    <Nav authenticated={authenticated}/>
+    <Nav authenticated={authenticated} setAuth={setAuth}/>
 
     <Router>
       <div className='container'>
@@ -55,12 +59,25 @@ const App = () => {
           <Route exact path='/'
                  render={props => <Home {...props} />}
           />
+
+
+
+
           <Route exact path='/login'
-                 render={props => <Login {...props} />}
+                 render={props => !authenticated ?
+                                  <Login {...props} setAuth={setAuth}/> :
+                                  <Redirect to='/' /> }
           />
+
           <Route exact path='/register'
                  render={props => <Register {...props} />}
           />
+
+
+
+
+
+
           <Route exact path='/customize'
                  render={props => <Customize {...props} />}
           />
