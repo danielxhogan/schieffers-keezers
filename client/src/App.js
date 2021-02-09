@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 // ROUTES
-import Nav from './components/Nav';
+import Nav from './components/nav/Nav';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -23,30 +23,30 @@ const BASE_URL = 'http://localhost:3001';
 // *****************************************************************************************
 const App = () => {
 
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(!false);
 
-  const checkAuthentication = async () => {
-    try {
-      const response = await fetch(BASE_URL + '/auth/verify', {
-                                   method: 'GET',
-                                   headers: {token: localStorage.token}
-                                   });
+  // const checkAuthentication = async () => {
+  //   try {
+  //     const response = await fetch(BASE_URL + '/auth/verify', {
+  //                                  method: 'GET',
+  //                                  headers: {token: localStorage.token}
+  //                                  });
 
-    const parseRes = await response.json();
-    parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
+  //   const parseRes = await response.json();
+  //   parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
 
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
+  //   } catch (err) {
+  //     console.log(err.message);
+  //   }
+  // }
 
-  useEffect(() => {
-    checkAuthentication();
-  })
+  // useEffect(() => {
+  //   checkAuthentication();
+  // })
 
 
   return <>
-    <Nav />
+    <Nav authenticated={authenticated}/>
 
     <Router>
       <div className='container'>
