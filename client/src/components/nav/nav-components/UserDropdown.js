@@ -3,13 +3,13 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 const UserDropdown = (props) => {
 
-  const[user_name, set_user_name] = useState('');
+  const [user_name, set_user_name] = useState('');
 
   const getName = async () => {
     const response = await fetch('http://localhost:3001/user/name', {
-                                 method: 'GET',
-                                 headers: {"token": localStorage.token}
-                                 });
+                                  method: 'GET',
+                                  headers: {'token': localStorage.token}
+                                  });
                               
     const parseRes = await response.json();
     set_user_name(parseRes);

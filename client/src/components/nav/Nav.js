@@ -18,13 +18,11 @@ const Nav = (props) => {
         </ul>
       </nav>
 
-
       {/* When not authenticated this will display buttons to login or register
           When authenticated this will display the users name as a button with a
           drop down menu with cart, account details, and logout buttons */}
 
       {props.authenticated ? <UserDropdown setAuth={props.setAuth}/> : <LoginRegister />}
-
 
     </header>
     <hr />

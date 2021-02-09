@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import './App.css';
+import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 // ROUTES
@@ -16,8 +16,6 @@ import Admin from './components/Admin';
 
 // CONSTANTS
 const BASE_URL = 'http://localhost:3001';
-
-
 
 // APP
 // *****************************************************************************************
@@ -48,7 +46,6 @@ const App = () => {
     checkAuthentication();
   })
 
-
   return <>
     <Nav authenticated={authenticated} setAuth={setAuth}/>
 
@@ -69,8 +66,10 @@ const App = () => {
                                   <Redirect to='/' /> }
           />
 
-          <Route exact path='/register'
-                 render={props => <Register {...props} />}
+          <Route exact path='/register' 
+                 render={props => !authenticated ?
+                                  <Register {...props} setAuth={setAuth}/> :
+                                  <Redirect to='/' /> }
           />
 
 
