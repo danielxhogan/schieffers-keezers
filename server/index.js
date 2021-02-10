@@ -13,7 +13,7 @@ PORT = 3001;
 app.use('/auth', require('./routes/auth'));
 app.use('/user', require('./routes/user'));
 app.use('/product', require('./routes/product'));
-// app.use('/admin', require('./routes/admin'));
+app.use('/admin', require('./routes/admin'));
 
 
 app.listen(PORT, () => {

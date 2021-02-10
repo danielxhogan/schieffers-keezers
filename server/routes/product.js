@@ -1,6 +1,21 @@
 const router = require('express').Router();
 const pool = require('../db');
 
+// GET ALL PRODUCTS
+// *****************************************************************************************
+router.get('/all', async (req, res) => {
+
+  try {
+    console.log('here');
+    const results = await pool.query('select * from products');
+    res.send(results.rows);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json('Server Error');
+  }
+})
+
 
 // GET ALL PRODUCTS OF TYPE :TYPE
 // *****************************************************************************************
@@ -11,10 +26,6 @@ router.get('/:type', async (req, res) => {
   // database for all records where category matches the value of :type
 
   try {
-    // console.log(req.params);
-    // res.send(req.params.type);
-
-
     const results = await pool.query(
       'select products.name, description, price, categories.name as type \
       from products \
@@ -25,39 +36,10 @@ router.get('/:type', async (req, res) => {
 
     res.json(results.rows);
 
-  
-
-
   } catch (err) {
     console.log(err.message);
     res.status(500).json('Server Error');
   }
-
-})
-
-
-
-
-
-
-router.get('/all', async (req, res) => {
-
-  try {
-    console.log('here');
-    const results = await pool.query('select * from products');
-    res.send(results.rows);
-
-
-
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).json('Server Error');
-  }
-
-
-
-
 })
 
 module.exports = router;

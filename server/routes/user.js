@@ -21,7 +21,6 @@ router.get('/name', authorization, async (req, res) => {
     console.log(err.message);
     res.status(500).json('Server Error');
   }
-
 })
 
 // ADD CART ITEM
