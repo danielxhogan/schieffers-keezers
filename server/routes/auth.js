@@ -70,8 +70,7 @@ router.get('/verify', authorization, async (req, res) => {
 
   // This route is hit when the client needs to be authorized.
   // The request is passed through the authorization middleware. If the client
-  // is authorized, their user_id is extracted from their token and added the the
-  // request object and this route sends it back to the client.
+  // is authorized, this route returns back true
 
   try {
     res.json(true);

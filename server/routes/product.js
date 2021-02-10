@@ -16,7 +16,6 @@ router.get('/all', async (req, res) => {
   }
 })
 
-
 // GET ALL PRODUCTS OF TYPE :TYPE
 // *****************************************************************************************
 router.get('/:type', async (req, res) => {

@@ -9,15 +9,15 @@ module.exports = (req, res, next) => {
   function validEmail(email) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   }
-  if (!validEmail(email)) { return res.status(404).json('invalid email'); }
+  if (!validEmail(email)) { return res.status(400).json('invalid email'); }
 
   if (req.path === '/register') {
     if (![first_name, last_name, email, password].every(Boolean)) {
-      return res.status(404).json('missing fields');
+      return res.status(400).json('missing fields');
     }
   } else if (req.path === '/login') {
     if (![email, password].every(Boolean)) {
-      return res.status(404).json('missing fields');
+      return res.status(400).json('missing fields');
     }
   }
   next();

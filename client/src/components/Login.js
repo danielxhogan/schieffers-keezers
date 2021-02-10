@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../App.css';
 
 const Login = ({ setAuth }) => {
 
@@ -8,11 +9,21 @@ const Login = ({ setAuth }) => {
   });
   const {email, password} = inputs;
 
+  const [badRequest, setBadRequest] = useState(false);
+  const [notAuthorized, setNotAuthorized] = useState(false);
+
   const onChange = e => {
     setInputs({...inputs, [e.target.name]: e.target.value});
   };
 
   const onSubmit = async (e) => {
+    
+    // when the login form is submitted, a post request is sent to the server
+    // with the email and password. If the form is missing data or the email is
+    // not the correct pattern the response will have a status 400. If the data doesn't 
+    // match any database records, the response will hava status 401. If the request
+    // doesn't have any errors, it will return a jwt token which is stored in local storage
+
     e.preventDefault();
     try {
       const body = {email, password};
@@ -23,10 +34,19 @@ const Login = ({ setAuth }) => {
                                    body: JSON.stringify(body)
       })
 
-      const parseRes = await response.json();
-      localStorage.setItem('token', parseRes);
-      setAuth();
-
+      if (!response.ok) {
+        if (response.status === 400) {
+          setBadRequest(true);
+          setNotAuthorized(false);
+        } else if (response.status === 401) {
+          setNotAuthorized(true);
+          setBadRequest(false);
+        }
+      } else {
+        const parseRes = await response.json();
+        localStorage.setItem('token', parseRes);
+        setAuth();
+      }
     } catch (err) {
       console.log(err.message);
     }
@@ -34,6 +54,8 @@ const Login = ({ setAuth }) => {
 
   return <>
   <h1 className='text-center my-3'>Login</h1>
+  {badRequest && <p class='invalid'>Fill out all fields and enter a valid email.</p>}
+  {notAuthorized && <p class='invalid'>The email or password you entered was not correct.</p>}
 
   <form onSubmit={onSubmit}>
     <input type='email' name='email' value={email} onChange={onChange} placeholder='email' className='form-control my-3' />

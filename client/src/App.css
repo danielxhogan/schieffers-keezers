@@ -28,3 +28,7 @@ nav ul a:hover {
 hr {
   margin: 0;
 }
+
+.invalid {
+  color: red;
+}

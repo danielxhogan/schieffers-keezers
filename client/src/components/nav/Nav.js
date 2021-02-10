@@ -8,6 +8,10 @@ const Nav = (props) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const adminCheck = async () => {
+
+    // this function checks to see if the the user currently logged in
+    // has administrative priveleges.
+
     try {
       const response = await fetch('http://localhost:3001/admin/check', {
                                     method: 'GET',
@@ -15,15 +19,12 @@ const Nav = (props) => {
                                     });
 
       if (!response.ok) {
-        console.log('not ok');
-        console.log(response.status);
         setIsAdmin(false);
       } else {
         const parseRes = await response.json();
         setIsAdmin(parseRes)
       }
     } catch (err) {
-      console.log(err.message);
       setIsAdmin(false);
     }
   }
@@ -47,7 +48,11 @@ const Nav = (props) => {
           When authenticated this will display the users name as a button with a
           drop down menu with cart, account details, and logout buttons */}
 
-      {props.authenticated ? <UserDropdown setAuth={props.setAuth} setIsAdmin={setIsAdmin}/> : <LoginRegister />}
+      {props.authenticated ?
+        <UserDropdown setAuth={props.setAuth}
+                      setIsAdmin={setIsAdmin}/>
+        :
+        <LoginRegister />}
 
     </header>
     <hr />
