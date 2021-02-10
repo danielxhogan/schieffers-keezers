@@ -11,7 +11,7 @@ const Register = ({ setAuth }) => {
   const {email, password, first_name, last_name} = inputs;
 
   const [badRequest, setBadRequest] = useState(false);
-  const [userExist, setUserExists] = useState(false);
+  const [userExists, setUserExists] = useState(false);
 
   const onChange = e => {
     setInputs({...inputs, [e.target.name]: e.target.value})
@@ -58,7 +58,7 @@ const Register = ({ setAuth }) => {
   return <>
   <h1 className='text-center my-5'>Register</h1>
   {badRequest && <p class='invalid'>Fill out all fields and enter a valid email.</p>}
-  {userExist && <p class='invalid'>The email you entered is already in use</p>}
+  {userExists && <p class='invalid'>The email you entered is already in use</p>}
 
   <form onSubmit={onSubmit}>
     <input type='email' name='email' placeholder='email' value={email} onChange={onChange} className='form-control my-3' />

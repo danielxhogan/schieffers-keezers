@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const pool = require('../db');
+const pool = require('../utils/db');
 const bcrypt = require('bcrypt');
 const createToken = require('../utils/createToken');
 const validInfo = require('../middleware/validInfo');

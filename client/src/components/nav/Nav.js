@@ -10,7 +10,8 @@ const Nav = (props) => {
   const adminCheck = async () => {
 
     // this function checks to see if the the user currently logged in
-    // has administrative priveleges.
+    // has administrative priveleges. If they do, isAdmin is set to true
+    // and a link to the admin page is rendered on the screen
 
     try {
       const response = await fetch('http://localhost:3001/admin/check', {

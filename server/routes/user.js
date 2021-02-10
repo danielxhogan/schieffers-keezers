@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const pool = require('../db');
+const pool = require('../utils/db');
 const authorization = require('../middleware/authorization');
 
 // GET NAME
