@@ -21,6 +21,33 @@ const BASE_URL = 'http://localhost:3001';
 const App = () => {
 
   const [authenticated, setAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const adminCheck = async () => {
+
+    // this function checks to see if the the user currently logged in
+    // has administrative priveleges. If they do, isAdmin is set to true
+
+    try {
+      const response = await fetch('http://localhost:3001/admin/check', {
+                                    method: 'GET',
+                                    headers: {'token': localStorage.token}
+                                    });
+
+      if (!response.ok) {
+        setIsAdmin(false);
+      } else {
+        const parseRes = await response.json();
+        console.log(parseRes);
+        setIsAdmin(parseRes)
+      }
+    } catch (err) {
+      setIsAdmin(false);
+    }
+  }
+  useEffect(() => {
+    adminCheck();
+  })
 
   const setAuth = boolean => {
     setAuthenticated(boolean);
@@ -46,7 +73,11 @@ const App = () => {
   })
 
   return <>
-    <Nav authenticated={authenticated} setAuth={setAuth}/>
+    <Nav authenticated={authenticated}
+         setAuth={setAuth}
+         isAdmin={isAdmin}
+         setIsAdmin={setIsAdmin}
+    />
 
     <Router>
       <div className='container'>
@@ -56,48 +87,44 @@ const App = () => {
                  render={props => <Home {...props} />}
           />
 
-
-
-
           <Route exact path='/login'
                  render={props => !authenticated ?
-                                  <Login {...props} setAuth={setAuth}/> :
+                                  <Login {...props} setAuth={setAuth} /> :
                                   <Redirect to='/' /> }
           />
 
           <Route exact path='/register' 
                  render={props => !authenticated ?
-                                  <Register {...props} setAuth={setAuth}/> :
+                                  <Register {...props} setAuth={setAuth} /> :
                                   <Redirect to='/' /> }
           />
-
-
-
-
-
 
           <Route exact path='/customize'
                  render={props => <Customize {...props} />}
           />
+
           <Route exact path='/cart'
                  render={props => <Cart {...props} />}
           />
+
           <Route exact path='/checkout'
                  render={props => <Checkout {...props} />}
           />
+
           <Route exact path='/account-details'
                  render={props => <AccountDetails {...props} />}
           />
+
           <Route exact path='/delete-account'
                  render={props => <DeleteAccount {...props} />}
           />
+          {console.log(isAdmin)}
+
           <Route exact path='/admin'
-                 render={props => <Admin {...props} />}
+                 render={props => isAdmin ?
+                                  <Admin {...props} isAdmin={isAdmin} setIsAdmin={setIsAdmin} /> :
+                                  <Redirect to='/' /> }
           />
-
-
-
-
 
         </Switch>
       </div>

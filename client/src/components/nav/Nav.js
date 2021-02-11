@@ -1,36 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../../App.css';
 import UserDropdown from './nav-components/UserDropdown';
 import LoginRegister from './nav-components/LoginRegister';
 
 const Nav = (props) => {
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  // The Nav component gets isAdmin and setIsAdmin from App.
+  // If the user has administrative priveliges, they will have access
+  // to the admin page.
 
-  const adminCheck = async () => {
+  console.log(props.isAdmin);
 
-    // this function checks to see if the the user currently logged in
-    // has administrative priveleges. If they do, isAdmin is set to true
-    // and a link to the admin page is rendered on the screen
-
-    try {
-      const response = await fetch('http://localhost:3001/admin/check', {
-                                    method: 'GET',
-                                    headers: {'token': localStorage.token}
-                                    });
-
-      if (!response.ok) {
-        setIsAdmin(false);
-      } else {
-        const parseRes = await response.json();
-        setIsAdmin(parseRes)
-      }
-    } catch (err) {
-      setIsAdmin(false);
-    }
-  }
-  adminCheck();
-  
   return <>
     <header className='main-header'>
 
@@ -41,7 +21,7 @@ const Nav = (props) => {
           <li></li>
           <li><a href='/'><h3>Home</h3></a></li>
           <li><a href='/customize'><h3>Customize</h3></a></li>
-          {isAdmin && <li><a href='/admin'><h3>Admin</h3></a></li>}
+          {props.isAdmin && <li><a href='/admin'><h3>Admin</h3></a></li>}
         </ul>
       </nav>
 
@@ -51,7 +31,7 @@ const Nav = (props) => {
 
       {props.authenticated ?
         <UserDropdown setAuth={props.setAuth}
-                      setIsAdmin={setIsAdmin}/>
+                      setIsAdmin={props.setIsAdmin}/>
         :
         <LoginRegister />}
 

@@ -41,4 +41,32 @@ router.get('/:type', async (req, res) => {
   }
 })
 
+// ADD A NEW PRODUCT
+// *****************************************************************************************
+router.post('/add', async (req, res) => {
+
+  // This route is hit when a user with administrative privileges wants to add
+  // a new product to the prouducts table in the database. If the product already exists,
+  // a status 401 is sent back to the client
+  
+  try {
+    const {name, description, price, category} = req.body;
+
+    // This query should return no results
+    const product = await pool.query('select * from products where name = $1', [name]);
+    if (product.rows.length !== 0) { return res.status(401).send('Product Already Exists') }
+
+    const newProduct = await pool.query(
+      'insert into products(name, description, price, category_id \
+        values($1, $2, $3, $4', [name, description, price, category]
+    );
+
+    res.json(true);
+    
+  } catch (err) {
+    console.log(err.message);
+  }
+
+})
+
 module.exports = router;

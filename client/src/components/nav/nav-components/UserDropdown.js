@@ -3,6 +3,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 const UserDropdown = (props) => {
 
+  // The UserDropdown component gets setIsAdmin and setAuth from Nav
+  // If the user clicks the logout button, both of these values are set to false.
+
   const [user_name, set_user_name] = useState('');
 
   const getName = async () => {
