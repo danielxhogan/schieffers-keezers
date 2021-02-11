@@ -23,6 +23,10 @@ const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const setAuth = boolean => {
+    setAuthenticated(boolean);
+  };
+
   const adminCheck = async () => {
 
     // this function checks to see if the the user currently logged in
@@ -49,9 +53,7 @@ const App = () => {
     adminCheck();
   })
 
-  const setAuth = boolean => {
-    setAuthenticated(boolean);
-  };
+
 
   const checkAuthentication = async () => {
     try {
@@ -78,7 +80,7 @@ const App = () => {
          isAdmin={isAdmin}
          setIsAdmin={setIsAdmin}
     />
-
+    {console.log(isAdmin)}
     <Router>
       <div className='container'>
         <Switch>
@@ -121,10 +123,19 @@ const App = () => {
           {console.log(isAdmin)}
 
           <Route exact path='/admin'
-                 render={props => isAdmin ?
-                                  <Admin {...props} isAdmin={isAdmin} setIsAdmin={setIsAdmin} /> :
-                                  <Redirect to='/' /> }
+                 render={props => {
+                   if (isAdmin === true) {console.log('isadmin is true'); return <Admin {...props} />}
+                   else { return <Redirect to='/' /> }
+                 }}
           />
+
+
+
+          {/* <Route exact path='/admin'
+                 render={props => isAdmin ?
+                                  <Redirect to='/' /> :
+                                  <Admin {...props} /> }
+          /> */}
 
         </Switch>
       </div>

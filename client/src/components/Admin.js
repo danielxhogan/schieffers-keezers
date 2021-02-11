@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const Admin = (props) => {
-  console.log(props.isAdmin)
+const Admin = () => {
 
   const [inputs, setInputs] = useState({
     name: '',
@@ -51,7 +50,6 @@ const Admin = (props) => {
         }
       } else {
         const parseRes = await response.json();
-        // props.setAuth();
       }
     } catch (err) {
       console.log(err.message);
