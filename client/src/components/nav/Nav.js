@@ -11,7 +11,7 @@ const Nav = (props) => {
   // to the admin page.
 
   return <>
-    <header className='main-header border'>
+    <header className='main-header'>
 
       <nav className='d-flex'>
         <h3>SK</h3>

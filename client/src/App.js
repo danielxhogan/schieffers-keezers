@@ -54,6 +54,12 @@ const App = () => {
   },[]);
 
   const checkAuthentication = async () => {
+
+    // this function checks to see if the the user is authenticated. The /auth/verify
+    // route checks to see if the use has a token, if it's valid, and if it is,
+    // returns true and authenticated is set to true, otherwise it returns
+    // status 403 not authorized.
+
     try {
       const response = await fetch(BASE_URL + '/auth/verify', {
                                    method: 'GET',

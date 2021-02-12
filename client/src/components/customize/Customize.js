@@ -29,23 +29,12 @@ const Customize = () => {
     </>
   }
 
-
-
   return <>
-    <h1 className='border'>Customize Your Keezer</h1>
+    <h1>Customize Your Keezer</h1>
 
     <div className='d-flex flex-wrap'>
       {products.map(product => makeProductCard(product))}
     </div>
-    
-
-
-
-
-
-
-
-
   </>
 }
 
