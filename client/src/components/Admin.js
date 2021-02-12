@@ -12,13 +12,14 @@ const Admin = () => {
 
   const [badRequest, setBadRequest] = useState(false);
   const [productExists, setProductExists] = useState(false);
+  const [invalidCategory, setInvalidCategory] = useState(false);
 
   const onChange = e => {
     setInputs({...inputs, [e.target.name]: e.target.value})
   };
 
   const onSubmit = async (e) => {
-
+    
     // When the product form is submitted, a post request is sent to the server
     // with the name, description, price, and category of the product
 
@@ -44,8 +45,14 @@ const Admin = () => {
         if (response.status === 400) {
           setBadRequest(true);
           setProductExists(false);
+          setInvalidCategory(false);
         } else if (response.status === 401) {
           setProductExists(true);
+          setBadRequest(false);
+          setInvalidCategory(false);
+        } else if (response.status === 404) {
+          setInvalidCategory(true);
+          setProductExists(false);
           setBadRequest(false);
         }
       } else {
@@ -58,8 +65,9 @@ const Admin = () => {
 
   return <>
   <h1 className='text-center my-5'>Add a Product</h1>
-  {badRequest && <p class='invalid'>Fill out all fields.</p>}
-  {productExists && <p class='invalid'>The email you entered is already in use</p>}
+  {badRequest && <p className='invalid'>Fill out all fields.</p>}
+  {productExists && <p className='invalid'>The email you entered is already in use</p>}
+  {invalidCategory && <p className='invalid'>The category you entered is invalid</p>}
 
   <form onSubmit={onSubmit}>
     <input type='text' name='name' placeholder='name' value={name} onChange={onChange} className='form-control my-3' />

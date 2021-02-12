@@ -22,7 +22,7 @@ const UserDropdown = (props) => {
   const onClick = () => {
     localStorage.setItem('token', '');
     props.setAuth(false);
-    props.setIsAdmin(false);
+    props.setAdmin(false);
   }
 
   return <>

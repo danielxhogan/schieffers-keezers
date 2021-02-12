@@ -27,40 +27,38 @@ const App = () => {
     setAuthenticated(boolean);
   };
 
+  const setAdmin = boolean => {
+    setIsAdmin(boolean);
+  }
+
   const adminCheck = async () => {
 
     // this function checks to see if the the user currently logged in
     // has administrative priveleges. If they do, isAdmin is set to true
 
     try {
-      const response = await fetch('http://localhost:3001/admin/check', {
+      const response = await fetch(BASE_URL + '/admin/check', {
                                     method: 'GET',
                                     headers: {'token': localStorage.token}
-                                    });
+      });
 
-      if (!response.ok) {
-        setIsAdmin(false);
-      } else {
-        const parseRes = await response.json();
-        console.log(parseRes);
-        setIsAdmin(parseRes)
-      }
+      const parseRes = await response.json();
+      parseRes === true ? setIsAdmin(true) : setIsAdmin(false);
+      
     } catch (err) {
-      setIsAdmin(false);
+      console.log(err.message);
     }
   }
   useEffect(() => {
     adminCheck();
   })
 
-
-
   const checkAuthentication = async () => {
     try {
       const response = await fetch(BASE_URL + '/auth/verify', {
                                    method: 'GET',
                                    headers: {token: localStorage.token}
-                                   });
+      });
 
     const parseRes = await response.json();
     parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
@@ -69,19 +67,17 @@ const App = () => {
       console.log(err.message);
     }
   }
-
   useEffect(() => {
     checkAuthentication();
   })
 
   return <>
-    <Nav authenticated={authenticated}
-         setAuth={setAuth}
-         isAdmin={isAdmin}
-         setIsAdmin={setIsAdmin}
-    />
-    {console.log(isAdmin)}
     <Router>
+      <Nav authenticated={authenticated}
+          setAuth={setAuth}
+          isAdmin={isAdmin}
+          setAdmin={setAdmin}
+      />
       <div className='container'>
         <Switch>
 
@@ -120,29 +116,15 @@ const App = () => {
           <Route exact path='/delete-account'
                  render={props => <DeleteAccount {...props} />}
           />
-          {console.log(isAdmin)}
 
           <Route exact path='/admin'
-                 render={props => {
-                   if (isAdmin === true) {console.log('isadmin is true'); return <Admin {...props} />}
-                   else { return <Redirect to='/' /> }
-                 }}
-          />
-
-
-
-          {/* <Route exact path='/admin'
                  render={props => isAdmin ?
-                                  <Redirect to='/' /> :
-                                  <Admin {...props} /> }
-          /> */}
-
+                                  <Admin {...props} /> :
+                                  <Redirect to='/' /> }
+          />
         </Switch>
       </div>
     </Router>
-
-
-
   </>
 }
 

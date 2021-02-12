@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import '../../App.css';
 import UserDropdown from './nav-components/UserDropdown';
 import LoginRegister from './nav-components/LoginRegister';
@@ -21,7 +22,7 @@ const Nav = (props) => {
           <li></li>
           <li><a href='/'><h3>Home</h3></a></li>
           <li><a href='/customize'><h3>Customize</h3></a></li>
-          {props.isAdmin && <li><a href='/admin'><h3>Admin</h3></a></li>}
+          {props.isAdmin && <li><Link to='/admin'><h3>Admin</h3></Link></li>}
         </ul>
       </nav>
 
@@ -31,7 +32,9 @@ const Nav = (props) => {
 
       {props.authenticated ?
         <UserDropdown setAuth={props.setAuth}
-                      setIsAdmin={props.setIsAdmin}/>
+                      setAdmin={props.setAdmin}
+
+                      />
         :
         <LoginRegister />}
 

@@ -56,17 +56,22 @@ router.post('/add', async (req, res) => {
     const product = await pool.query('select * from products where name = $1', [name]);
     if (product.rows.length !== 0) { return res.status(401).send('Product Already Exists') }
 
+    const results = await pool.query('select category_id from categories where name = $1', [category])
+    if (results.rows.length === 0) { return res.status(404).send('Invalid Category') }
+
+    category_id = results.rows[0].category_id;
+    
     const newProduct = await pool.query(
-      'insert into products(name, description, price, category_id \
-        values($1, $2, $3, $4', [name, description, price, category]
+      'insert into products(name, description, price, category_id) \
+        values($1, $2, $3, $4)', [name, description, parseFloat(price), category_id]
     );
 
     res.json(true);
     
   } catch (err) {
     console.log(err.message);
+    res.status(500).json('Server Error');
   }
-
 })
 
 module.exports = router;
