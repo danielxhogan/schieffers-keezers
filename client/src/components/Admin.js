@@ -13,23 +13,19 @@ const Admin = () => {
   const [badRequest, setBadRequest] = useState(false);
   const [productExists, setProductExists] = useState(false);
   const [invalidCategory, setInvalidCategory] = useState(false);
+  const [validEntry, setValidEntry] = useState(false);
 
   const onChange = e => {
     setInputs({...inputs, [e.target.name]: e.target.value})
   };
 
   const onSubmit = async (e) => {
-    
-    // When the product form is submitted, a post request is sent to the server
-    // with the name, description, price, and category of the product
 
-    // when the register form is submitted, a post request is sent to the server
-    // with the email, password, first name, and last name submitted. If the form is 
-    // missing data or the email is not the correct pattern the response will have a status 400.
-    // If the database already has a record using the email that was entered, the response
-    // will have a status 401. If the request doesn't have any errors, a new record will be
-    // created in the users table and a jwt token will be sent in the response and stored
-    // in local storage
+    // When the product form is submitted, a post request is sent to the server
+    // with the name, description, price, and category of the product. If there is
+    // missing fields, an existing product by the same name, the price has an invalid format,
+    // or the category isn't a valid category, the request will have an error status in the 
+    // response. Otherwise, the new product will be added to the products tabel in the db.
 
     e.preventDefault();
     try {
@@ -46,16 +42,24 @@ const Admin = () => {
           setBadRequest(true);
           setProductExists(false);
           setInvalidCategory(false);
+          setValidEntry(false);
         } else if (response.status === 401) {
           setProductExists(true);
           setBadRequest(false);
           setInvalidCategory(false);
+          setValidEntry(false);
         } else if (response.status === 404) {
           setInvalidCategory(true);
           setProductExists(false);
           setBadRequest(false);
+          setValidEntry(false);
         }
       } else {
+        setValidEntry(true);
+        setInvalidCategory(false);
+        setProductExists(false);
+        setBadRequest(false);
+        setInputs({name: '', description: '', price: '', category: ''})
         const parseRes = await response.json();
       }
     } catch (err) {
@@ -65,9 +69,10 @@ const Admin = () => {
 
   return <>
   <h1 className='text-center my-5'>Add a Product</h1>
-  {badRequest && <p className='invalid'>Fill out all fields.</p>}
-  {productExists && <p className='invalid'>The email you entered is already in use</p>}
+  {badRequest && <p className='invalid'>Fill out all fields. Make sure to enter a valid price.</p>}
+  {productExists && <p className='invalid'>The name you entered is already in use</p>}
   {invalidCategory && <p className='invalid'>The category you entered is invalid</p>}
+  {validEntry && <p className='invalid'>The product has been submitted</p>}
 
   <form onSubmit={onSubmit}>
     <input type='text' name='name' placeholder='name' value={name} onChange={onChange} className='form-control my-3' />

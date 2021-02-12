@@ -1,13 +1,18 @@
 const router = require('express').Router();
 const pool = require('../utils/db');
+const validProduct = require('../middleware/validProduct');
 
 // GET ALL PRODUCTS
 // *****************************************************************************************
 router.get('/all', async (req, res) => {
 
   try {
-    console.log('here');
-    const results = await pool.query('select * from products');
+    const results = await pool.query(
+      'select products.name, description, price, images.name as image \
+       from products \
+       join images \
+       on products.product_id = images.product_id'
+      );
     res.send(results.rows);
 
   } catch (err) {
@@ -43,7 +48,7 @@ router.get('/:type', async (req, res) => {
 
 // ADD A NEW PRODUCT
 // *****************************************************************************************
-router.post('/add', async (req, res) => {
+router.post('/add', validProduct, async (req, res) => {
 
   // This route is hit when a user with administrative privileges wants to add
   // a new product to the prouducts table in the database. If the product already exists,

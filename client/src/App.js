@@ -7,7 +7,7 @@ import Nav from './components/nav/Nav';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
-import Customize from './components/Customize';
+import Customize from './components/customize/Customize';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import AccountDetails from './components/AccountDetails';
@@ -51,7 +51,7 @@ const App = () => {
   }
   useEffect(() => {
     adminCheck();
-  })
+  },[]);
 
   const checkAuthentication = async () => {
     try {
@@ -78,7 +78,7 @@ const App = () => {
           isAdmin={isAdmin}
           setAdmin={setAdmin}
       />
-      <div className='container'>
+      <div className='body'>
         <Switch>
 
           <Route exact path='/'

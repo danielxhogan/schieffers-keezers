@@ -10,10 +10,8 @@ const Nav = (props) => {
   // If the user has administrative priveliges, they will have access
   // to the admin page.
 
-  console.log(props.isAdmin);
-
   return <>
-    <header className='main-header'>
+    <header className='main-header border'>
 
       <nav className='d-flex'>
         <h3>SK</h3>
@@ -34,7 +32,7 @@ const Nav = (props) => {
         <UserDropdown setAuth={props.setAuth}
                       setAdmin={props.setAdmin}
 
-                      />
+        />
         :
         <LoginRegister />}
 
