@@ -17,7 +17,6 @@ const Nav = (props) => {
         <h3>SK</h3>
 
         <ul>
-          <li></li>
           <li><a href='/'><h3>Home</h3></a></li>
           <li><a href='/customize'><h3>Customize</h3></a></li>
           {props.isAdmin && <li><Link to='/admin'><h3>Admin</h3></Link></li>}

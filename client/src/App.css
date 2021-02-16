@@ -35,10 +35,35 @@ hr {
   margin: 0;
 }
 
-.body {
+body {
   background-color: var(--light-grey);
+}
+
+.body {
+  padding: 3% 10%;
+}
+
+.login-register {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 50%;
+  margin: auto;
+  background-color: white;
+  padding: 3%;
+}
+
+.form-control {
+  border: 1px black solid;
 }
 
 .invalid {
   color: red;
+}
+
+.cart-button {
+  margin-left: 3%;
+}
+
+.product-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

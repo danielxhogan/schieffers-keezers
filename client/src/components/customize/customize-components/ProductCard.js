@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../../App.css';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 
 const ProductCard = (props) => {
 
@@ -12,13 +11,17 @@ const ProductCard = (props) => {
 
   return <>
   <div className='p-4'>
-    <Card style={{ width: '18rem' }} className='p-5'>
+    <Card style={{ width: '18rem' }} className='p-5 product-card'>
       <Card.Img variant="top" src={`images/${props.image}`} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
         <Card.Text>{props.price}</Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <input
+          type='radio'
+          value={props.product_id}
+          name={props.type}
+        />
       </Card.Body>
     </Card>
   </div>

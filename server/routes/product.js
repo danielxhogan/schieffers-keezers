@@ -31,11 +31,14 @@ router.get('/:type', async (req, res) => {
 
   try {
     const results = await pool.query(
-      'select products.name, description, price, categories.name as type \
+      'select products.product_id, products.name, description, price, categories.name as type, images.name as image \
       from products \
       join categories \
       on products.category_id = categories.category_id \
-      where categories.name = $1', [req.params.type]
+      join images \
+      on products.product_id = images.product_id \
+      where categories.name = $1 \
+      order by price', [req.params.type]
     )
 
     res.json(results.rows);

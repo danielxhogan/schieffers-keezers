@@ -35,7 +35,7 @@ router.post('/addCartItem', authorization, async (req, res) => {
   try {
     const user_id = req.user_id;
     const {product_id, qty} = req.body;
-  
+    
     const newCartItem = await pool.query(
       'insert into cart(user_id, product_id, qty) \
        values($1, $2, $3) returning *', [user_id, product_id, qty]

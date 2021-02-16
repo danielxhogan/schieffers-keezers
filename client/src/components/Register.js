@@ -56,17 +56,20 @@ const Register = ({ setAuth }) => {
   };
 
   return <>
-  <h1 className='text-center my-5'>Register</h1>
-  {badRequest && <p class='invalid'>Fill out all fields and enter a valid email.</p>}
-  {userExists && <p class='invalid'>The email you entered is already in use</p>}
+  <div className='login-register'>
+    <h1 className='text-center my-5'>Register</h1>
+    {badRequest && <p class='invalid'>Fill out all fields and enter a valid email.</p>}
+    {userExists && <p class='invalid'>The email you entered is already in use</p>}
 
-  <form onSubmit={onSubmit}>
-    <input type='email' name='email' placeholder='email' value={email} onChange={onChange} className='form-control my-3' />
-    <input type='password' name='password' placeholder='password' value={password} onChange={onChange} className='form-control my-3' />
-    <input type='text' name='first_name' placeholder='first name' value={first_name} onChange={onChange} className='form-control my-3' />
-    <input type='text' name='last_name' placeholder='last name' value={last_name} onChange={onChange} className='form-control my-3' />
-    <button className='btn btn-success btn-block'>Submit</button>
-  </form>
+    <form onSubmit={onSubmit}>
+      <input type='email' name='email' placeholder='email' value={email} onChange={onChange} className='form-control my-3' />
+      <input type='password' name='password' placeholder='password' value={password} onChange={onChange} className='form-control my-3' />
+      <input type='text' name='first_name' placeholder='first name' value={first_name} onChange={onChange} className='form-control my-3' />
+      <input type='text' name='last_name' placeholder='last name' value={last_name} onChange={onChange} className='form-control my-3' />
+      <button className='btn btn-success btn-block'>Submit</button>
+    </form>
+  </div>
+
   </>
 }
 

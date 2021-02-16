@@ -53,15 +53,17 @@ const Login = ({ setAuth }) => {
   };
 
   return <>
-  <h1 className='text-center my-3'>Login</h1>
-  {badRequest && <p class='invalid'>Fill out all fields and enter a valid email.</p>}
-  {notAuthorized && <p class='invalid'>The email or password you entered was not correct.</p>}
+  <div className='login-register'>
+    <h1 className='text-center my-3'>Login</h1>
+    {badRequest && <p className='invalid'>Fill out all fields and enter a valid email.</p>}
+    {notAuthorized && <p className='invalid'>The email or password you entered was not correct.</p>}
 
-  <form onSubmit={onSubmit}>
-    <input type='email' name='email' value={email} onChange={onChange} placeholder='email' className='form-control my-3' />
-    <input type='password' name='password' value={password} onChange={onChange} placeholder='password' className='form-control my-3' />
-    <button className="btn btn-success btn-block">Submit</button>
-  </form>
+    <form onSubmit={onSubmit}>
+      <input type='email' name='email' value={email} onChange={onChange} placeholder='email' className='form-control my-3' />
+      <input type='password' name='password' value={password} onChange={onChange} placeholder='password' className='form-control my-3' />
+      <button className="btn btn-success btn-block">Submit</button>
+    </form>
+  </div>
   </>
 }
 
