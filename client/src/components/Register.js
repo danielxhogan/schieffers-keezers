@@ -69,7 +69,6 @@ const Register = ({ setAuth }) => {
       <button className='btn btn-success btn-block'>Submit</button>
     </form>
   </div>
-
   </>
 }
 

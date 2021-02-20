@@ -17,8 +17,8 @@ const Nav = (props) => {
         <h3>SK</h3>
 
         <ul>
-          <li><a href='/'><h3>Home</h3></a></li>
-          <li><a href='/customize'><h3>Customize</h3></a></li>
+          <li><Link to='/'><h3>Home</h3></Link></li>
+          <li><Link to='/customize'><h3>Customize</h3></Link></li>
           {props.isAdmin && <li><Link to='/admin'><h3>Admin</h3></Link></li>}
         </ul>
       </nav>
@@ -31,8 +31,7 @@ const Nav = (props) => {
         <UserDropdown setAuth={props.setAuth}
                       setAdmin={props.setAdmin}
 
-        />
-        :
+        /> :
         <LoginRegister />}
 
     </header>

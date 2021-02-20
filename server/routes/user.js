@@ -49,4 +49,63 @@ router.post('/addCartItem', authorization, async (req, res) => {
   };
 });
 
+// GET USER CART ITEMS
+// *****************************************************************************************
+router.get('/getUserCart', authorization, async (req, res) => {
+
+  // This route is hit when a client wants all the cart items of the user
+  // currently logged in
+
+  try {
+    const user_id = req.user_id;
+
+    const userCartItems = await pool.query(
+      'select products.name, description, qty, price, images.name as image, cart_item_id\
+      from cart \
+      join users \
+      on cart.user_id = users.user_id \
+      join products \
+      on cart.product_id = products.product_id \
+      join images \
+      on products.product_id = images.product_id \
+      where users.user_id = $1',
+      [user_id]
+    );
+
+    res.json(userCartItems.rows);
+
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json('Server Error');
+  }
+
+})
+
+// DELETE CART ITEM
+// *****************************************************************************************
+router.delete('/deleteCartItem', authorization, async (req, res) => {
+
+  // This route is hit when the user presses the delete button on an item 
+  // in their cart. The request comes with a token that stores thier user_id
+  // which is added to the request object by authorization. The request also
+  // contains the cart_item_id they want to delete.
+
+  try {
+    const {cart_item_id} = req.body;
+
+    const deletedItem = await pool.query(
+      'delete from cart \
+      where cart_item_id = $1 returning *',
+      [cart_item_id]
+    )
+
+    res.json(deletedItem);
+    
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json('Server Error');
+  }
+
+})
+
 module.exports = router;

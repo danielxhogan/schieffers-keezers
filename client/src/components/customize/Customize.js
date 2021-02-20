@@ -10,6 +10,7 @@ const Customize = () => {
 
   const [freezers, setFreezers] = useState([]);
   const [tapkits, setTapKits] = useState([]);
+  const [dripPans, setDripPans] = useState([]);
   const [thermostats, setThermostats] = useState([]);
   const [c02Tanks, setC02Tanks] = useState([]);
 
@@ -22,9 +23,17 @@ const Customize = () => {
   }
   useEffect(() => { getFreezers(); },[]);
 
+  const getDripPans = async () => {
+    const response = await fetch(BASE_URL + '/product/drippan');
+    const parseRes = await response.json();
+    setDripPans(parseRes);
+  }
+  useEffect(() => { getDripPans(); },[]);
+
   const getThermostats = async () => {
     const response = await fetch(BASE_URL + '/product/thermostat');
     const parseRes = await response.json();
+    console.log(parseRes);
     setThermostats(parseRes);
   }
   useEffect(() => { getThermostats(); },[]);
@@ -80,7 +89,38 @@ const Customize = () => {
     e.preventDefault();
     const product_id = e.target.tapkit.value;
     if (product_id === '') {
-      alert('You have to choose a freezer.');
+      alert('You have to choose a tap kit.');
+    } 
+    else {
+      try {
+        const body = {product_id: product_id, qty: 1}
+        
+        const response = await fetch(BASE_URL + '/user/addCartItem', {
+                                     method: 'POST',
+                                     headers: {token: localStorage.token,
+                                               'Content-type': 'application/json'},
+                                     body: JSON.stringify(body)
+        })
+        if (!response.ok) {
+          if (response.status === 403) {
+            alert('You must be logged in');
+          } else if (response.status === 500) {
+            alert('There was a problem adding product to cart');
+          }
+        } else {
+          alert('Product was successfully added to cart');
+        } 
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+  }
+
+  const submitDripPan = async (e) => {
+    e.preventDefault();
+    const product_id = e.target.drippan.value;
+    if (product_id === '') {
+      alert('You have to choose a drip pan.');
     } 
     else {
       try {
@@ -111,7 +151,7 @@ const Customize = () => {
     e.preventDefault();
     const product_id = e.target.thermostat.value;
     if (product_id === '') {
-      alert('You have to choose a freezer.');
+      alert('You have to choose a thermostat.');
     } 
     else {
       try {
@@ -142,7 +182,7 @@ const Customize = () => {
     e.preventDefault();
     const product_id = e.target.c02tank.value;
     if (product_id === '') {
-      alert('You have to choose a freezer.');
+      alert('You have to choose a c02 tank.');
     } 
     else {
       try {
@@ -184,6 +224,14 @@ const Customize = () => {
       <h2>Choose Your Tap Kit</h2>
       <div className='d-flex flex-wrap'>
         {tapkits.map(tapkit => {return <ProductCard {...tapkit}/>})}
+      </div>
+      <button type='submit' className='cart-button'>Add To Cart</button>
+    </form>
+
+    <form onSubmit={submitDripPan} className='p-5'>
+      <h2>Choose Your Drip Pan</h2>
+      <div className='d-flex flex-wrap'>
+        {dripPans.map(dripPan => {return <ProductCard {...dripPan}/>})}
       </div>
       <button type='submit' className='cart-button'>Add To Cart</button>
     </form>

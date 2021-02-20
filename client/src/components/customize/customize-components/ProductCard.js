@@ -11,17 +11,18 @@ const ProductCard = (props) => {
 
   return <>
   <div className='p-4'>
-    <Card style={{ width: '18rem' }} className='p-5 product-card'>
-      <Card.Img variant="top" src={`images/${props.image}`} />
+    <Card style={{ width: '18rem' }} className='p-4 product-card'>
+      <div className='card-img'><Card.Img variant="top" src={`images/${props.image}`}/></div>
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
-        <Card.Text>{props.price}</Card.Text>
+        <Card.Text className='mba'>${props.price}</Card.Text>
         <input
           type='radio'
           value={props.product_id}
           name={props.type}
         />
+
       </Card.Body>
     </Card>
   </div>

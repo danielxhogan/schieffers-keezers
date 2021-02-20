@@ -8,7 +8,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Customize from './components/customize/Customize';
-import Cart from './components/Cart';
+import Cart from './components/cart/Cart';
 import Checkout from './components/Checkout';
 import AccountDetails from './components/AccountDetails';
 import DeleteAccount from './components/DeleteAccount';
@@ -41,10 +41,16 @@ const App = () => {
                                     method: 'GET',
                                     headers: {'token': localStorage.token}
       });
-
-      const parseRes = await response.json();
-      parseRes === true ? setIsAdmin(true) : setIsAdmin(false);
-      
+      if (!response.ok) {
+        if (response.status === 403) {
+          setIsAdmin(false);
+        } else if (response.status === 500) {
+          setIsAdmin(false);
+        }
+      } else {
+        const parseRes = await response.json();
+        setIsAdmin(parseRes);
+      } 
     } catch (err) {
       console.log(err.message);
     }
@@ -65,10 +71,16 @@ const App = () => {
                                    method: 'GET',
                                    headers: {token: localStorage.token}
       });
-
-    const parseRes = await response.json();
-    parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
-
+      if (!response.ok) {
+        if (response.status === 403) {
+          setAuthenticated(false);
+        } else if (response.status === 500) {
+          setAuthenticated(false);
+        }
+      } else {
+        const parseRes = await response.json();
+        setAuthenticated(parseRes);
+      }
     } catch (err) {
       console.log(err.message);
     }
@@ -108,19 +120,27 @@ const App = () => {
           />
 
           <Route exact path='/cart'
-                 render={props => <Cart {...props} />}
+                 render={props => authenticated ?
+                                  <Cart {...props} /> :
+                                  <Redirect to='/' />}
           />
 
           <Route exact path='/checkout'
-                 render={props => <Checkout {...props} />}
+                 render={props => authenticated ?
+                                  <Checkout {...props} /> :
+                                  <Redirect to='/' />}
           />
 
           <Route exact path='/account-details'
-                 render={props => <AccountDetails {...props} />}
+                 render={props => authenticated ?
+                                  <AccountDetails {...props} /> :
+                                  <redirect to='/' />}
           />
 
           <Route exact path='/delete-account'
-                 render={props => <DeleteAccount {...props} />}
+                 render={props => authenticated ?
+                                  <DeleteAccount {...props} /> :
+                                  <Redirect to='/' />}
           />
 
           <Route exact path='/admin'

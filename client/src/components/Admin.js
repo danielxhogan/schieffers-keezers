@@ -72,7 +72,7 @@ const Admin = () => {
   {badRequest && <p className='invalid'>Fill out all fields. Make sure to enter a valid price.</p>}
   {productExists && <p className='invalid'>The name you entered is already in use</p>}
   {invalidCategory && <p className='invalid'>The category you entered is invalid</p>}
-  {validEntry && <p className='invalid'>The product has been submitted</p>}
+  {validEntry && <p>The product has been submitted</p>}
 
   <form onSubmit={onSubmit}>
     <input type='text' name='name' placeholder='name' value={name} onChange={onChange} className='form-control my-3' />

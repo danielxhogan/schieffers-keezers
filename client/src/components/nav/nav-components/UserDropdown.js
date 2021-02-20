@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import {Link} from 'react-router-dom';
 
 const UserDropdown = (props) => {
 
@@ -33,9 +34,9 @@ const UserDropdown = (props) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item href="/cart">Cart</Dropdown.Item>
-          <Dropdown.Item href="/account-details">Account Details</Dropdown.Item>
-          <Dropdown.Item href="/" onClick={onClick}>Logout</Dropdown.Item>
+          <Dropdown.Item><Link to='/cart'>Cart</Link></Dropdown.Item>
+          <Dropdown.Item><Link to='/account-details'>Account Details</Link></Dropdown.Item>
+          <Dropdown.Item onClick={onClick}><Link to='/'>Logout</Link></Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </nav>
