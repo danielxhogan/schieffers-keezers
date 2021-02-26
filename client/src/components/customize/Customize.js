@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import '../../App.css';
 import ProductCard from './customize-components/ProductCard';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:3002';
 
 const Customize = () => {
 

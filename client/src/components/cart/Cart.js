@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CartItem from './cart-components/CartItem';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:3002';
 
 const Cart = () => {
 
@@ -10,7 +10,7 @@ const Cart = () => {
   const [user_name, set_user_name] = useState('');
 
   const getName = async () => {
-    const response = await fetch('http://localhost:3001/user/name', {
+    const response = await fetch(BASE_URL + '/user/name', {
                                   method: 'GET',
                                   headers: {'token': localStorage.token}
                                   });
@@ -48,9 +48,6 @@ const Cart = () => {
     <div class='cart-display'>
       {cartItems.map(cartItem => {return <CartItem { ...cartItem} set_user_name={set_user_name}/>})}
     </div>
-  
-    
-
   </>
 }
 

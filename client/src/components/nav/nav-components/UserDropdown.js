@@ -10,7 +10,7 @@ const UserDropdown = (props) => {
   const [user_name, set_user_name] = useState('');
 
   const getName = async () => {
-    const response = await fetch('http://localhost:3001/user/name', {
+    const response = await fetch('http://localhost:3002/user/name', {
                                   method: 'GET',
                                   headers: {'token': localStorage.token}
                                   });

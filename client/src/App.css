@@ -43,7 +43,7 @@ body {
 }
 
 .body {
-  padding: 5% 10%;
+  padding: 3% 5%;
 }
 
 .login-register {
@@ -61,6 +61,40 @@ body {
 
 .invalid {
   color: red;
+}
+
+/* HOME */
+/* *************************** */
+
+#lp-body {
+  background-color: white;
+  padding: 5% 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  min-height: 340px;
+}
+
+#lp-header {
+  float: left;
+  margin-left: 2%;
+}
+
+#lp-h1 {
+  font-size: 5em;
+}
+
+.lp-h2 {
+  font-size: 3.5em;
+}
+
+#img-div {
+  padding-right: 5%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#keezer1 {
+  width: 90%;
 }
 
 /* CUSTOMIZE */

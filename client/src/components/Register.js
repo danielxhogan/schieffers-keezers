@@ -31,7 +31,7 @@ const Register = ({ setAuth }) => {
     try {
       const body = {email, password, first_name, last_name};
 
-      const response = await fetch('http://localhost:3001/auth/register', {
+      const response = await fetch('http://localhost:3002/auth/register', {
                                    method:'POST',
                                    headers:{'Content-type': 'application/json'},
                                    body: JSON.stringify(body)

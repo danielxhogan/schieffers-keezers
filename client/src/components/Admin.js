@@ -31,7 +31,7 @@ const Admin = () => {
     try {
       const body = {name, description, price, category};
 
-      const response = await fetch('http://localhost:3001/product/add', {
+      const response = await fetch('http://localhost:3002/product/add', {
                                    method:'POST',
                                    headers:{'Content-type': 'application/json'},
                                    body: JSON.stringify(body)
