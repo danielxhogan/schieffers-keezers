@@ -30,6 +30,7 @@ const Nav = (props) => {
       {props.authenticated ?
         <UserDropdown setAuth={props.setAuth}
                       setAdmin={props.setAdmin}
+                      BASE_URL={props.BASE_URL}
 
         /> :
         <LoginRegister />}

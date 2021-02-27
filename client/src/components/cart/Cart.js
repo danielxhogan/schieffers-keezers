@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CartItem from './cart-components/CartItem';
 
-const BASE_URL = 'http://localhost:3002';
+// const BASE_URL = 'http://localhost:3002';
 
-const Cart = () => {
+const Cart = (props) => {
 
   const [cartItems, setCartItems] = useState([])
   const [user_name, set_user_name] = useState('');
 
   const getName = async () => {
-    const response = await fetch(BASE_URL + '/user/name', {
+    const response = await fetch(props.BASE_URL + '/user/name', {
                                   method: 'GET',
                                   headers: {'token': localStorage.token}
                                   });
@@ -27,7 +27,7 @@ const Cart = () => {
     // the users jwt token which contains the users user_id which is
     // used to query the database for the users cart items.
 
-    const response = await fetch(BASE_URL + '/user/getUserCart', {
+    const response = await fetch(props.BASE_URL + '/user/getUserCart', {
                                  method: 'GET',
                                  headers: {token: localStorage.token}
     })
@@ -46,7 +46,10 @@ const Cart = () => {
       
     </div>
     <div class='cart-display'>
-      {cartItems.map(cartItem => {return <CartItem { ...cartItem} set_user_name={set_user_name}/>})}
+      {cartItems.map(cartItem => {return <CartItem { ...cartItem}
+                                                   set_user_name={set_user_name}
+                                                   BASE_URL={props.BASE_URL} />
+                                                   })}
     </div>
   </>
 }

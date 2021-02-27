@@ -7,7 +7,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-PORT = 3002;
+PORT = 3001;
 
 app.use('/auth', require('./routes/auth'));
 app.use('/user', require('./routes/user'));

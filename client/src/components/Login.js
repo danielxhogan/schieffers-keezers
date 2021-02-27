@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 
-const Login = ({ setAuth }) => {
+const Login = (props) => {
 
   const [inputs, setInputs] = useState({
     email: '',
@@ -28,7 +28,7 @@ const Login = ({ setAuth }) => {
     try {
       const body = {email, password};
 
-      const response = await fetch('http://localhost:3002/auth/login', {
+      const response = await fetch(props.BASE_URL + '/auth/login', {
                                    method: 'POST',
                                    headers: {'Content-type': 'application/json'},
                                    body: JSON.stringify(body)
@@ -45,7 +45,7 @@ const Login = ({ setAuth }) => {
       } else {
         const parseRes = await response.json();
         localStorage.setItem('token', parseRes);
-        setAuth();
+        props.setAuth();
       }
     } catch (err) {
       console.log(err.message);

@@ -78,7 +78,6 @@ router.get('/getUserCart', authorization, async (req, res) => {
     console.log(err.message);
     res.status(500).json('Server Error');
   }
-
 })
 
 // DELETE CART ITEM
@@ -100,6 +99,51 @@ router.delete('/deleteCartItem', authorization, async (req, res) => {
     )
 
     res.json(deletedItem);
+    
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json('Server Error');
+  }
+})
+
+// GET USER ADDRESS
+// *****************************************************************************************
+router.get('/address', authorization, async (req, res) => {
+
+  // This route is hit when the client request information about the address
+  // of the user currently logged in.
+
+  try {
+    const user_id = req.user_id;
+
+    const userAddress = await pool.query('select * from addresses where user_id = $1', [user_id])
+    if (userAddress.rows.length === 0) { return res.status(404).json('User has no address on file') }
+
+    res.json(userAddress.rows[0]);
+    
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).json('Server Error');
+  }
+
+})
+
+// CREATE/UPDATE USER ADDRESS
+// *****************************************************************************************
+router.post('/update-address', authorization, async (req, res) => {
+
+  // This route is hit when the user either doesn't yet have an address stored in the 
+  // database and wants to add one, or already has an address and wants to update it
+
+  try {
+    const user_id = req.user_id;
+
+    const userAddress = await pool.query('select * from addresses where user_id = $1', [user_id])
+    if (userAddress.rows.length === 0) {
+      // user needs to add a record into the addresses table
+    } else {
+      // user wants to update their existing record
+    }
     
   } catch (err) {
     console.log(err.message);

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const BASE_URL = 'http://localhost:3002';
+// const BASE_URL = 'http://localhost:3002';
 
 const CartItem = (props) => {
 
@@ -9,7 +9,7 @@ const CartItem = (props) => {
   const deleteItem = async (req, res) => {
     const body = {cart_item_id: props.cart_item_id}
 
-    const response = await fetch(BASE_URL + '/user/deleteCartItem', {
+    const response = await fetch(props.BASE_URL + '/user/deleteCartItem', {
                                  method: 'delete',
                                  headers: {token: localStorage.token,
                                           'Content-type': 'application/json'},

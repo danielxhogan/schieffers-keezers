@@ -9,12 +9,12 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Customize from './components/customize/Customize';
 import Cart from './components/cart/Cart';
-import Checkout from './components/Checkout';
+import Checkout from './components/checkout/Checkout';
 import AccountDetails from './components/AccountDetails';
 import DeleteAccount from './components/DeleteAccount';
 import Admin from './components/Admin';
 
-const BASE_URL = 'http://localhost:3002';
+// const BASE_URL = 'http://localhost:3002';
 
 // APP
 // *****************************************************************************************
@@ -22,6 +22,7 @@ const App = () => {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [BASE_URL, _] = useState('http://localhost:3001')
 
   const setAuth = boolean => {
     setAuthenticated(boolean);
@@ -95,57 +96,58 @@ const App = () => {
           setAuth={setAuth}
           isAdmin={isAdmin}
           setAdmin={setAdmin}
+          BASE_URL={BASE_URL}
       />
       <div className='body'>
         <Switch>
 
           <Route exact path='/'
-                 render={props => <Home {...props} />}
+                 render={props => <Home {...props} BASE_URL={BASE_URL} />}
           />
 
           <Route exact path='/login'
                  render={props => !authenticated ?
-                                  <Login {...props} setAuth={setAuth} /> :
+                                  <Login {...props} setAuth={setAuth} BASE_URL={BASE_URL} /> :
                                   <Redirect to='/' /> }
           />
 
           <Route exact path='/register' 
                  render={props => !authenticated ?
-                                  <Register {...props} setAuth={setAuth} /> :
+                                  <Register {...props} setAuth={setAuth} BASE_URL={BASE_URL} /> :
                                   <Redirect to='/' /> }
           />
 
           <Route exact path='/customize'
-                 render={props => <Customize {...props} />}
+                 render={props => <Customize {...props} BASE_URL={BASE_URL} />}
           />
 
           <Route exact path='/cart'
                  render={props => authenticated ?
-                                  <Cart {...props} /> :
+                                  <Cart {...props} BASE_URL={BASE_URL} /> :
                                   <Redirect to='/' />}
           />
 
           <Route exact path='/checkout'
                  render={props => authenticated ?
-                                  <Checkout {...props} /> :
+                                  <Checkout {...props} BASE_URL={BASE_URL} /> :
                                   <Redirect to='/' />}
           />
 
           <Route exact path='/account-details'
                  render={props => authenticated ?
-                                  <AccountDetails {...props} /> :
+                                  <AccountDetails {...props} BASE_URL={BASE_URL} /> :
                                   <redirect to='/' />}
           />
 
           <Route exact path='/delete-account'
                  render={props => authenticated ?
-                                  <DeleteAccount {...props} /> :
+                                  <DeleteAccount {...props} BASE_URL={BASE_URL} /> :
                                   <Redirect to='/' />}
           />
 
           <Route exact path='/admin'
                  render={props => isAdmin ?
-                                  <Admin {...props} /> :
+                                  <Admin {...props} BASE_URL={BASE_URL} /> :
                                   <Redirect to='/' /> }
           />
         </Switch>

@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import '../../App.css';
 import ProductCard from './customize-components/ProductCard';
 
-const BASE_URL = 'http://localhost:3002';
+// const BASE_URL = 'http://localhost:3002';
 
-const Customize = () => {
+const Customize = (props) => {
 
   // state variables used for holding data on each product, seperated by category
 
@@ -17,21 +17,21 @@ const Customize = () => {
   // functions for querying the db for data on products of each category
 
   const getFreezers = async () => {
-    const response = await fetch(BASE_URL + '/product/freezer');
+    const response = await fetch(props.BASE_URL + '/product/freezer');
     const parseRes = await response.json();
     setFreezers(parseRes);
   }
   useEffect(() => { getFreezers(); },[]);
 
   const getDripPans = async () => {
-    const response = await fetch(BASE_URL + '/product/drippan');
+    const response = await fetch(props.BASE_URL + '/product/drippan');
     const parseRes = await response.json();
     setDripPans(parseRes);
   }
   useEffect(() => { getDripPans(); },[]);
 
   const getThermostats = async () => {
-    const response = await fetch(BASE_URL + '/product/thermostat');
+    const response = await fetch(props.BASE_URL + '/product/thermostat');
     const parseRes = await response.json();
     console.log(parseRes);
     setThermostats(parseRes);
@@ -39,14 +39,14 @@ const Customize = () => {
   useEffect(() => { getThermostats(); },[]);
 
   const getTapKits = async () => {
-    const response = await fetch(BASE_URL + '/product/tapkit');
+    const response = await fetch(props.BASE_URL + '/product/tapkit');
     const parseRes = await response.json();
     setTapKits(parseRes);
   }
   useEffect(() => { getTapKits(); },[]);
 
   const getC02Tanks = async () => {
-    const response = await fetch(BASE_URL + '/product/c02tank');
+    const response = await fetch(props.BASE_URL + '/product/c02tank');
     const parseRes = await response.json();
     setC02Tanks(parseRes);
   }
@@ -64,7 +64,7 @@ const Customize = () => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(BASE_URL + '/user/addCartItem', {
+        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -95,7 +95,7 @@ const Customize = () => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(BASE_URL + '/user/addCartItem', {
+        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -126,7 +126,7 @@ const Customize = () => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(BASE_URL + '/user/addCartItem', {
+        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -157,7 +157,7 @@ const Customize = () => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(BASE_URL + '/user/addCartItem', {
+        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -188,7 +188,7 @@ const Customize = () => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(BASE_URL + '/user/addCartItem', {
+        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -215,7 +215,7 @@ const Customize = () => {
     <form onSubmit={submitFreezer} className='p-5'>
       <h2>Choose Your Freezer</h2>
       <div className='d-flex flex-wrap'>
-        {freezers.map(freezer => {return <ProductCard {...freezer}/>})}
+        {freezers.map(freezer => {return <ProductCard {...freezer} BASE_URL={props.BASE_URL}/>})}
       </div>
       <button type='submit' className='cart-button'>Add To Cart</button>
     </form>
@@ -223,7 +223,7 @@ const Customize = () => {
     <form onSubmit={submitTapkit} className='p-5'>
       <h2>Choose Your Tap Kit</h2>
       <div className='d-flex flex-wrap'>
-        {tapkits.map(tapkit => {return <ProductCard {...tapkit}/>})}
+        {tapkits.map(tapkit => {return <ProductCard {...tapkit} BASE_URL={props.BASE_URL}/>})}
       </div>
       <button type='submit' className='cart-button'>Add To Cart</button>
     </form>
@@ -231,7 +231,7 @@ const Customize = () => {
     <form onSubmit={submitDripPan} className='p-5'>
       <h2>Choose Your Drip Pan</h2>
       <div className='d-flex flex-wrap'>
-        {dripPans.map(dripPan => {return <ProductCard {...dripPan}/>})}
+        {dripPans.map(dripPan => {return <ProductCard {...dripPan} BASE_URL={props.BASE_URL}/>})}
       </div>
       <button type='submit' className='cart-button'>Add To Cart</button>
     </form>
@@ -239,7 +239,7 @@ const Customize = () => {
     <form onSubmit={submitThermostat} className='p-5'>
       <h2>Choose Your Thermostat</h2>
       <div className='d-flex flex-wrap'>
-        {thermostats.map(thermostat => {return <ProductCard {...thermostat}/>})}
+        {thermostats.map(thermostat => {return <ProductCard {...thermostat} BASE_URL={props.BASE_URL}/>})}
       </div>
       <button type='submit' className='cart-button'>Add To Cart</button>
     </form>
@@ -247,7 +247,7 @@ const Customize = () => {
     <form onSubmit={submitC02Tank} className='p-5'>
       <h2>Choose Your C02 Tank</h2>
       <div className='d-flex flex-wrap'>
-        {c02Tanks.map(c02Tank => {return <ProductCard {...c02Tank}/>})}
+        {c02Tanks.map(c02Tank => {return <ProductCard {...c02Tank} BASE_URL={props.BASE_URL}/>})}
       </div>
       <button type='submit' className='cart-button'>Add To Cart</button>
     </form>
