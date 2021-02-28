@@ -10,7 +10,7 @@ import Register from './components/Register';
 import Customize from './components/customize/Customize';
 import Cart from './components/cart/Cart';
 import Checkout from './components/checkout/Checkout';
-import AccountDetails from './components/AccountDetails';
+import AccountDetails from './components/account-details/AccountDetails';
 import DeleteAccount from './components/DeleteAccount';
 import Admin from './components/Admin';
 
@@ -22,7 +22,7 @@ const App = () => {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [BASE_URL, _] = useState('http://localhost:3001')
+  const [BASE_URL, _] = useState('http://localhost:3002')
 
   const setAuth = boolean => {
     setAuthenticated(boolean);
@@ -136,7 +136,7 @@ const App = () => {
           <Route exact path='/account-details'
                  render={props => authenticated ?
                                   <AccountDetails {...props} BASE_URL={BASE_URL} /> :
-                                  <redirect to='/' />}
+                                  <Redirect to='/' />}
           />
 
           <Route exact path='/delete-account'

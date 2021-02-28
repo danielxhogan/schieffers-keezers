@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const pool = require('../utils/db');
 const authorization = require('../middleware/authorization');
+const validAddress = require('../middleware/validAddress');
 
 // GET NAME
 // *****************************************************************************************
@@ -116,7 +117,7 @@ router.get('/address', authorization, async (req, res) => {
   try {
     const user_id = req.user_id;
 
-    const userAddress = await pool.query('select * from addresses where user_id = $1', [user_id])
+    const userAddress = await pool.query('select street, city, state, zip from addresses where user_id = $1', [user_id])
     if (userAddress.rows.length === 0) { return res.status(404).json('User has no address on file') }
 
     res.json(userAddress.rows[0]);
@@ -125,31 +126,47 @@ router.get('/address', authorization, async (req, res) => {
     console.log(err.message)
     res.status(500).json('Server Error');
   }
-
 })
 
 // CREATE/UPDATE USER ADDRESS
 // *****************************************************************************************
-router.post('/update-address', authorization, async (req, res) => {
+router.post('/update-address', validAddress, authorization, async (req, res) => {
 
   // This route is hit when the user either doesn't yet have an address stored in the 
   // database and wants to add one, or already has an address and wants to update it
-
+  
   try {
-    const user_id = req.user_id;
-
+    const user_id = req.user_id
+    const {street, city, state, zip} = req.body;
+    
     const userAddress = await pool.query('select * from addresses where user_id = $1', [user_id])
+
     if (userAddress.rows.length === 0) {
-      // user needs to add a record into the addresses table
+      // user does not have an address, create a new record
+      const newAddress = await pool.query(
+        'insert into addresses(user_id, street, city, state, zip) \
+        values($1, $2, $3, $4, $5) \
+        returning street, city, state, zip',
+        [user_id, street, city, state, zip]
+      )
+      res.json(newAddress.rows[0]);
+
     } else {
-      // user wants to update their existing record
+      // user already has an address, update
+      const updatedAddress = await pool.query(
+        'update addresses \
+        set street = $1, city = $2, state = $3, zip = $4 \
+        where user_id = $5 \
+        returning street, city, state, zip',
+        [street, city, state, zip, user_id]          
+      )
+      res.json(updatedAddress.rows[0]);
     }
     
   } catch (err) {
     console.log(err.message);
     res.status(500).json('Server Error');
-  }
-
-})
+  };
+});
 
 module.exports = router;
