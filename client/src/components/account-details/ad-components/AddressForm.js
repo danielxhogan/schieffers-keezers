@@ -26,7 +26,7 @@ const AddressForm = (props) => {
                                    method: 'POST',
                                    headers: {'Content-Type': 'application/json',
                                              'token': localStorage.token},
-                                  body: JSON.stringify(body)                       
+                                   body: JSON.stringify(body)                       
       });
       if (!response.ok) {
         if (response.status === 400) {
