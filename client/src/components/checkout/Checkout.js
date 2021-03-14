@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Address from '../Address/Address';
 import AddressForm from '../Address/AddressForm';
-import ProductCard from '../customize/customize-components/ProductCard'
+import ProductCard from './checkout-components/ProductCard'
 
 
 const Checkout = (props) => {
 
+  const [invalidRequest, setInvalidRequest] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [cartTotal, setCartTotal] = useState(0.0);
   const [hasAddress, setHasAddress] = useState(false);
@@ -58,6 +59,30 @@ const Checkout = (props) => {
   }
   useEffect(() => { getCartitems(); },[]);
 
+  const onClick = async (e) => {
+    e.preventDefault();
+
+    if (!hasAddress) {
+      setInvalidRequest(true);
+    } else {
+      const response = await fetch(props.BASE_URL + '/checkout/checkout', {
+                                   method: 'GET',
+                                   headers: {token: localStorage.token}
+      });
+
+      if (!response.ok) {
+        if (response.status == 401) {
+          setInvalidRequest(true);
+        }
+      } else {
+        console.log('suh');
+        setInvalidRequest(false);
+      }
+    }
+
+    
+  }
+
 
 
   var formatter = new Intl.NumberFormat('en-US', {
@@ -86,7 +111,8 @@ const Checkout = (props) => {
     </div>
 
     <div class='d-flex justify-content-right'>
-      <button ><h1>Checkout</h1></button>
+      <button onClick={onClick}><h1>Checkout</h1></button>
+      {invalidRequest && <p className='invalid'>you must have an address on file and choose atleast a freezer and a tap kit to checkout</p>}
     </div>
     
   </>
