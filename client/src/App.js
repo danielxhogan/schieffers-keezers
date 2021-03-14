@@ -14,8 +14,6 @@ import AccountDetails from './components/account-details/AccountDetails';
 import DeleteAccount from './components/DeleteAccount';
 import Admin from './components/Admin';
 
-// const BASE_URL = 'http://localhost:3002';
-
 // APP
 // *****************************************************************************************
 const App = () => {
