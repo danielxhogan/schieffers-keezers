@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Address from './ad-components/Address';
-import AddressForm from './ad-components/AddressForm';
+import Address from '../Address/Address';
+import AddressForm from '../Address/AddressForm';
 
 
 const AccountDetails = (props) => {
@@ -36,7 +36,7 @@ const AccountDetails = (props) => {
       {editing ?
       <AddressForm setEditing={setEditing} setAddress={setAddress} address={address} BASE_URL={props.BASE_URL}/>
       :
-      <Address address={address} setEditing={setEditing} BASE_URL={props.BASE_URL}/>}
+      <Address setEditing={setEditing} address={address} BASE_URL={props.BASE_URL}/>}
 
     </div>
   </>

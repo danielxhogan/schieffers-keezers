@@ -2,12 +2,11 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CartItem from './cart-components/CartItem';
 
-// const BASE_URL = 'http://localhost:3002';
-
 const Cart = (props) => {
 
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState([]);
   const [user_name, set_user_name] = useState('');
+  const [cartTotal, setCartTotal] = useState(0.0);
 
   const getName = async () => {
     const response = await fetch(props.BASE_URL + '/user/name', {
@@ -32,23 +31,36 @@ const Cart = (props) => {
                                  headers: {token: localStorage.token}
     })
     const parseRes = await response.json();
-    console.log(parseRes);
+
+    let total = 0.0
+    for (let i=0.0; i<parseRes.length; i++) {
+      total += parseFloat(parseRes[i].price);
+    }
+
+    setCartTotal(total);
     setCartItems(parseRes);
   }
   useEffect(() => { getCartitems(); },[]);
+
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 
   return <>
     <div class='cart-title'>
       <div class='d-flex justify-content-between'>
        <h1>{user_name}'s Cart</h1>
+       <h2>Total: {formatter.format(cartTotal)}</h2>
        <Link to='/checkout'>Checkout</Link>
       </div>
       
     </div>
     <div class='cart-display'>
       {cartItems.map(cartItem => {return <CartItem { ...cartItem}
-                                                   set_user_name={set_user_name}
-                                                   BASE_URL={props.BASE_URL} />
+                                                   BASE_URL={props.BASE_URL}
+                                                   cartTotal={cartTotal}
+                                                   setCartTotal={setCartTotal} />
                                                    })}
     </div>
   </>

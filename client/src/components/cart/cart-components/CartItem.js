@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 
-// const BASE_URL = 'http://localhost:3002';
-
 const CartItem = (props) => {
 
   const [deleted, setDeleted] = useState(false);
@@ -19,10 +17,11 @@ const CartItem = (props) => {
       if (response.status === 403) {
         alert('You must be logged in');
       } else if (response.status === 500) {
-        alert('There was a problem adding product to cart');
+        alert('There was a problem deleting product to cart');
       }
     } else {
       setDeleted(true);
+      props.setCartTotal(props.cartTotal - parseFloat(props.price));
     }
   }
 

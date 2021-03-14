@@ -15,7 +15,7 @@ app.use('/auth', require('./routes/auth'));
 app.use('/user', require('./routes/user'));
 app.use('/product', require('./routes/product'));
 app.use('/admin', require('./routes/admin'));
-app.use('/checkout', require('/routes/checkout'));
+app.use('/checkout', require('./routes/checkout'));
 
 
 app.listen(PORT, () => {
