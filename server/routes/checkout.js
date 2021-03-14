@@ -11,7 +11,6 @@ router.get('/checkout', authorization, async (req,res) => {
   // It checks to see if the user has at least a freezer and a tap kit in their cart.
 
   try {
-
     const user_id = req.user_id;
 
     const address = await pool.query('select * from addresses where user_id = $1', [user_id]);
@@ -34,10 +33,10 @@ router.get('/checkout', authorization, async (req,res) => {
     let hasTapKit = false;
 
     for (let i=0; i<userCartItems.rows.length; i++) {
-      if (userCartItems.rows[i].name == 'freezer') {
+      if (userCartItems.rows[i].name === 'freezer') {
         hasFreezer = true;
       }
-      if (userCartItems.rows[i].name == 'tapkit') {
+      if (userCartItems.rows[i].name === 'tapkit') {
         hasTapKit = true;
       }
     }
@@ -52,14 +51,6 @@ router.get('/checkout', authorization, async (req,res) => {
     console.log(err.message);
     res.status(500).json('Server Error');
   }
-
-
-
-
-
-
-
-
 });
 
 module.exports = router;

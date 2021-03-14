@@ -4,6 +4,43 @@ import ProductCard from './customize-components/ProductCard';
 
 const Customize = (props) => {
 
+  // DYNAMICALLY SEPERATING ALL PRODUCTS BY CATEGORY
+  // ****************************************************************************
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const getTypes = async () => {
+    const response = await fetch(props.BASE_URL + '/product/types');
+    const parseRes = await response.json();
+    const array = []
+
+    for (let i=0; i<parseRes.length; i++) {
+      array.push(parseRes[i].name);
+    }
+    setCategories(array);
+  }
+  useEffect(() => { getTypes(); },[]);
+
+  const getAll = async () => {
+  const response = await fetch(props.BASE_URL + '/product/all')
+  const parseRes = await response.json();
+  setProducts(parseRes);
+  }
+  useEffect(() => { getAll(); },[]);
+
+  const itemsByType = {}
+
+  for (let i=0; i<categories.length; i++) {
+    itemsByType[categories[i]] = [];
+  }
+
+  for (let i=0; i<products.length; i++) {
+    itemsByType[products[i].category].push(products[i]);
+  }
+  console.log('itemsByType: ', itemsByType);
+
+  // NOT DYNAMICALLY SEPERATING ALL PRODUCTS BY CATEGORY
+  // ****************************************************************************
   // state variables used for holding data on each product, seperated by category
 
   const [freezers, setFreezers] = useState([]);
@@ -31,7 +68,6 @@ const Customize = (props) => {
   const getThermostats = async () => {
     const response = await fetch(props.BASE_URL + '/product/thermostat');
     const parseRes = await response.json();
-    console.log(parseRes);
     setThermostats(parseRes);
   }
   useEffect(() => { getThermostats(); },[]);
@@ -178,7 +214,8 @@ const Customize = (props) => {
   
   const submitC02Tank = async (e) => {
     e.preventDefault();
-    const product_id = e.target.c02tank.value;
+    const product_id = e.target['c02tank'].value;
+    console.log(product_id);
     if (product_id === '') {
       alert('You have to choose a c02 tank.');
     } 
@@ -207,8 +244,27 @@ const Customize = (props) => {
     }
   }
 
+
+  // const createForm = () => {
+  //   return <>
+  //     <form onSubmit={onSubmit} className='p-5'>
+
+  //     </form>
+
+
+
+  //   </>
+  // }
+
+
+
   return <>
     <h1>Customize Your Keezer</h1>
+
+
+    {/* {categories.map(createForm)} */}
+
+
 
     <form onSubmit={submitFreezer} className='p-5'>
       <h2>Choose Your Freezer</h2>

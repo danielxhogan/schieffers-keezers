@@ -8,16 +8,30 @@ router.get('/all', async (req, res) => {
 
   try {
     const results = await pool.query(
-      'select products.name, description, price, images.name as image \
+      'select products.name, description, price, images.name as image, categories.name as category \
        from products \
        join images \
-       on products.product_id = images.product_id'
+       on products.product_id = images.product_id \
+       join categories \
+       on products.category_id = categories.category_id'
       );
     res.send(results.rows);
 
   } catch (err) {
     console.log(err);
     res.status(500).json('Server Error');
+  }
+})
+
+// GET ALL TYPES
+// *****************************************************************************************
+router.get('/types', async (req, res) => {
+  try {
+    const results = await pool.query('select name from categories');
+    res.send(results.rows);
+    
+  } catch (err) {
+    console.log(err.message);
   }
 })
 
