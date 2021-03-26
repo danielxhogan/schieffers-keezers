@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-PORT = 3002;
+PORT = process.env.PORT || 3002;
 
 app.use('/auth', require('./routes/auth'));
 app.use('/user', require('./routes/user'));

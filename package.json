@@ -4,7 +4,8 @@
   "description": "Server for Schieffer's Keezers ecommerce web app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm i && npm run build"
   },
   "author": "Daniel Hogan",
   "license": "ISC",
