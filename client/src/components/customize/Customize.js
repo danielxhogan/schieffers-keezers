@@ -6,38 +6,38 @@ const Customize = (props) => {
 
   // DYNAMICALLY SEPERATING ALL PRODUCTS BY CATEGORY
   // ****************************************************************************
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  // const [products, setProducts] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
-  const getTypes = async () => {
-    const response = await fetch(props.BASE_URL + '/product/types');
-    const parseRes = await response.json();
-    const array = []
+  // const getTypes = async () => {
+  //   const response = await fetch(props.BASE_URL + '/product/types');
+  //   const parseRes = await response.json();
+  //   const array = []
 
-    for (let i=0; i<parseRes.length; i++) {
-      array.push(parseRes[i].name);
-    }
-    setCategories(array);
-  }
-  useEffect(() => { getTypes(); },[]);
+  //   for (let i=0; i<parseRes.length; i++) {
+  //     array.push(parseRes[i].name);
+  //   }
+  //   setCategories(array);
+  // }
+  // useEffect(() => { getTypes(); },[]);
 
-  const getAll = async () => {
-  const response = await fetch(props.BASE_URL + '/product/all')
-  const parseRes = await response.json();
-  setProducts(parseRes);
-  }
-  useEffect(() => { getAll(); },[]);
+  // const getAll = async () => {
+  // const response = await fetch(props.BASE_URL + '/product/all')
+  // const parseRes = await response.json();
+  // setProducts(parseRes);
+  // }
+  // useEffect(() => { getAll(); },[]);
 
-  const itemsByType = {}
+  // const itemsByType = {}
 
-  for (let i=0; i<categories.length; i++) {
-    itemsByType[categories[i]] = [];
-  }
+  // for (let i=0; i<categories.length; i++) {
+  //   itemsByType[categories[i]] = [];
+  // }
 
-  for (let i=0; i<products.length; i++) {
-    itemsByType[products[i].category].push(products[i]);
-  }
-  console.log('itemsByType: ', itemsByType);
+  // for (let i=0; i<products.length; i++) {
+  //   itemsByType[products[i].category].push(products[i]);
+  // }
+  // console.log('itemsByType: ', itemsByType);
 
   // NOT DYNAMICALLY SEPERATING ALL PRODUCTS BY CATEGORY
   // ****************************************************************************
@@ -245,14 +245,58 @@ const Customize = (props) => {
   }
 
 
-  // const createForm = () => {
+
+
+
+  // const onSubmit = async (e, category) => {
+  //   e.preventDefault();
+  //   const product_id = e.target[category].value;
+  //   console.log(product_id);
+  //   // if (product_id === '') {
+  //   //   alert('You have to choose a c02 tank.');
+  //   // } 
+  //   // else {
+  //   //   try {
+  //   //     const body = {product_id: product_id, qty: 1}
+        
+  //   //     const response = await fetch(props.BASE_URL + '/user/addCartItem', {
+  //   //                                  method: 'POST',
+  //   //                                  headers: {token: localStorage.token,
+  //   //                                            'Content-type': 'application/json'},
+  //   //                                  body: JSON.stringify(body)
+  //   //     })
+  //   //     if (!response.ok) {
+  //   //       if (response.status === 403) {
+  //   //         alert('You must be logged in');
+  //   //       } else if (response.status === 500) {
+  //   //         alert('There was a problem adding product to cart');
+  //   //       }
+  //   //     } else {
+  //   //       alert('Product was successfully added to cart');
+  //   //     } 
+  //   //   } catch (err) {
+  //   //     console.log(err.message);
+  //   //   }
+  //   // }
+  // }
+
+
+
+
+
+
+
+  // const createForm = (category) => {
+  //   console.log('creating form');
+
   //   return <>
-  //     <form onSubmit={onSubmit} className='p-5'>
-
+  //     <form onSubmit={category => { return onSubmit(category) }} className='p-5'>
+  //       <h2>Choose your {category}</h2>
+  //       <div classname='d-flex flex-wrap'>
+  //         {itemsByType[category].map(item => {return <ProductCard {...item} BASE_URL={props.BASE_URL} />})}
+  //       </div>
+  //       <buttom type='submit' className='cart-button'>Add To Cart</buttom>
   //     </form>
-
-
-
   //   </>
   // }
 
@@ -262,14 +306,15 @@ const Customize = (props) => {
     <h1>Customize Your Keezer</h1>
 
 
-    {/* {categories.map(createForm)} */}
+    {/* {categories.map(category => { return createForm(category) })}
+    {console.log(categories)} */}
 
 
 
     <form onSubmit={submitFreezer} className='p-5'>
       <h2>Choose Your Freezer</h2>
       <div className='d-flex flex-wrap'>
-        {freezers.map(freezer => {return <ProductCard {...freezer} BASE_URL={props.BASE_URL}/>})}
+        {freezers.map(freezer => {return <ProductCard {...freezer} BASE_URL={props.BASE_URL} />})}
       </div>
       <button type='submit' className='cart-button'>Add To Cart</button>
     </form>
