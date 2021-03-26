@@ -19,7 +19,7 @@ const Checkout = (props) => {
   });
 
   const getAddress = async () => {
-    const response = await fetch(props.BASE_URL + '/user/address', {
+    const response = await fetch('/user/address', {
                                  method: 'GET',
                                  headers: {'token': localStorage.token}
     })
@@ -43,7 +43,7 @@ const Checkout = (props) => {
     // the users jwt token which contains the users user_id which is
     // used to query the database for the users cart items.
 
-    const response = await fetch(props.BASE_URL + '/user/getUserCart', {
+    const response = await fetch('/user/getUserCart', {
                                  method: 'GET',
                                  headers: {token: localStorage.token}
     })
@@ -65,7 +65,7 @@ const Checkout = (props) => {
     if (!hasAddress) {
       setInvalidRequest(true);
     } else {
-      const response = await fetch(props.BASE_URL + '/checkout/checkout', {
+      const response = await fetch('/checkout/checkout', {
                                    method: 'GET',
                                    headers: {token: localStorage.token}
       });

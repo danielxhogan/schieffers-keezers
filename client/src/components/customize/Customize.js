@@ -52,35 +52,35 @@ const Customize = (props) => {
   // functions for querying the db for data on products of each category
 
   const getFreezers = async () => {
-    const response = await fetch(props.BASE_URL + '/product/freezer');
+    const response = await fetch('/product/freezer');
     const parseRes = await response.json();
     setFreezers(parseRes);
   }
   useEffect(() => { getFreezers(); },[]);
 
   const getDripPans = async () => {
-    const response = await fetch(props.BASE_URL + '/product/drippan');
+    const response = await fetch('/product/drippan');
     const parseRes = await response.json();
     setDripPans(parseRes);
   }
   useEffect(() => { getDripPans(); },[]);
 
   const getThermostats = async () => {
-    const response = await fetch(props.BASE_URL + '/product/thermostat');
+    const response = await fetch('/product/thermostat');
     const parseRes = await response.json();
     setThermostats(parseRes);
   }
   useEffect(() => { getThermostats(); },[]);
 
   const getTapKits = async () => {
-    const response = await fetch(props.BASE_URL + '/product/tapkit');
+    const response = await fetch('/product/tapkit');
     const parseRes = await response.json();
     setTapKits(parseRes);
   }
   useEffect(() => { getTapKits(); },[]);
 
   const getC02Tanks = async () => {
-    const response = await fetch(props.BASE_URL + '/product/c02tank');
+    const response = await fetch('/product/c02tank');
     const parseRes = await response.json();
     setC02Tanks(parseRes);
   }
@@ -98,7 +98,7 @@ const Customize = (props) => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
+        const response = await fetch('/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -129,7 +129,7 @@ const Customize = (props) => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
+        const response = await fetch('/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -160,7 +160,7 @@ const Customize = (props) => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
+        const response = await fetch('/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -191,7 +191,7 @@ const Customize = (props) => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
+        const response = await fetch('/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},
@@ -223,7 +223,7 @@ const Customize = (props) => {
       try {
         const body = {product_id: product_id, qty: 1}
         
-        const response = await fetch(props.BASE_URL + '/user/addCartItem', {
+        const response = await fetch('/user/addCartItem', {
                                      method: 'POST',
                                      headers: {token: localStorage.token,
                                                'Content-type': 'application/json'},

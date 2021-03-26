@@ -9,7 +9,7 @@ const Cart = (props) => {
   const [cartTotal, setCartTotal] = useState(0.0);
 
   const getName = async () => {
-    const response = await fetch(props.BASE_URL + '/user/name', {
+    const response = await fetch('/user/name', {
                                   method: 'GET',
                                   headers: {'token': localStorage.token}
                                   });
@@ -26,7 +26,7 @@ const Cart = (props) => {
     // the users jwt token which contains the users user_id which is
     // used to query the database for the users cart items.
 
-    const response = await fetch(props.BASE_URL + '/user/getUserCart', {
+    const response = await fetch('/user/getUserCart', {
                                  method: 'GET',
                                  headers: {token: localStorage.token}
     })

@@ -14,7 +14,7 @@ const AccountDetails = (props) => {
   });
 
   const getAddress = async () => {
-    const response = await fetch(props.BASE_URL + '/user/address', {
+    const response = await fetch('/user/address', {
                                  method: 'GET',
                                  headers: {'token': localStorage.token}
     })

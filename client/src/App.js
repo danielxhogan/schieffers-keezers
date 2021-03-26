@@ -36,7 +36,7 @@ const App = () => {
     // has administrative priveleges. If they do, isAdmin is set to true
 
     try {
-      const response = await fetch(BASE_URL + '/admin/check', {
+      const response = await fetch('/admin/check', {
                                     method: 'GET',
                                     headers: {'token': localStorage.token}
       });
@@ -66,7 +66,7 @@ const App = () => {
     // status 403 not authorized.
 
     try {
-      const response = await fetch(BASE_URL + '/auth/verify', {
+      const response = await fetch('/auth/verify', {
                                    method: 'GET',
                                    headers: {token: localStorage.token}
       });

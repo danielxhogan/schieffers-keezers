@@ -7,7 +7,7 @@ const CartItem = (props) => {
   const deleteItem = async (req, res) => {
     const body = {cart_item_id: props.cart_item_id}
 
-    const response = await fetch(props.BASE_URL + '/user/deleteCartItem', {
+    const response = await fetch('/user/deleteCartItem', {
                                  method: 'delete',
                                  headers: {token: localStorage.token,
                                           'Content-type': 'application/json'},

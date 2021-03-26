@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Server for Schieffer's Keezers ecommerce web app",
   "main": "index.js",
+  "engines": {
+    "node": "14.15.4",
+    "npm": "7.7.5"
+  },
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client && npm i && npm run build"

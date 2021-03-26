@@ -13,8 +13,6 @@ const Home = () => {
         <img src='./images/lp-image-1.jpg' alt='' id='keezer1'/>
       </div>
     </div>
-
-    
   </>
 }
 

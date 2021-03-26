@@ -22,7 +22,7 @@ const AddressForm = (props) => {
     try {
       const body = {street, city, state, zip};
 
-      const response = await fetch(props.BASE_URL + '/user/update-address', {
+      const response = await fetch('/user/update-address', {
                                    method: 'POST',
                                    headers: {'Content-Type': 'application/json',
                                              'token': localStorage.token},
