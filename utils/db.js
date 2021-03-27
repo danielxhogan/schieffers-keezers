@@ -4,7 +4,7 @@ const Pool = require('pg').Pool;
 
 const devConfig = {
   user: 'rando_mane',
-  password: 'COLExBURNED#363',
+  password: process.env.PASSWORD,
   host: 'localhost',
   port: 5432,
   database: 'sk'
