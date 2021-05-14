@@ -6,8 +6,8 @@ const Customize = (props) => {
 
   // DYNAMICALLY SEPERATING ALL PRODUCTS BY CATEGORY
   // ****************************************************************************
-  // const [products, setProducts] = useState([]);
-  // const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState(['freezer', 'tapkit', 'drippan', 'thermostat', 'co2tank']);
 
   // const getTypes = async () => {
   //   const response = await fetch(props.BASE_URL + '/product/types');
@@ -252,32 +252,32 @@ const Customize = (props) => {
   //   e.preventDefault();
   //   const product_id = e.target[category].value;
   //   console.log(product_id);
-  //   // if (product_id === '') {
-  //   //   alert('You have to choose a c02 tank.');
-  //   // } 
-  //   // else {
-  //   //   try {
-  //   //     const body = {product_id: product_id, qty: 1}
+  //   if (product_id === '') {
+  //     alert('You have to choose a c02 tank.');
+  //   } 
+  //   else {
+  //     try {
+  //       const body = {product_id: product_id, qty: 1}
         
-  //   //     const response = await fetch(props.BASE_URL + '/user/addCartItem', {
-  //   //                                  method: 'POST',
-  //   //                                  headers: {token: localStorage.token,
-  //   //                                            'Content-type': 'application/json'},
-  //   //                                  body: JSON.stringify(body)
-  //   //     })
-  //   //     if (!response.ok) {
-  //   //       if (response.status === 403) {
-  //   //         alert('You must be logged in');
-  //   //       } else if (response.status === 500) {
-  //   //         alert('There was a problem adding product to cart');
-  //   //       }
-  //   //     } else {
-  //   //       alert('Product was successfully added to cart');
-  //   //     } 
-  //   //   } catch (err) {
-  //   //     console.log(err.message);
-  //   //   }
-  //   // }
+  //       const response = await fetch(props.BASE_URL + '/user/addCartItem', {
+  //                                    method: 'POST',
+  //                                    headers: {token: localStorage.token,
+  //                                              'Content-type': 'application/json'},
+  //                                    body: JSON.stringify(body)
+  //       })
+  //       if (!response.ok) {
+  //         if (response.status === 403) {
+  //           alert('You must be logged in');
+  //         } else if (response.status === 500) {
+  //           alert('There was a problem adding product to cart');
+  //         }
+  //       } else {
+  //         alert('Product was successfully added to cart');
+  //       } 
+  //     } catch (err) {
+  //       console.log(err.message);
+  //     }
+  //   }
   // }
 
 
