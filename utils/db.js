@@ -10,9 +10,10 @@ try {
     database: 'sk'
   });
 
+  module.exports = pool;
+
 } catch (err) {
   console.log(err.message);
 }
 
 
-module.exports = pool;
