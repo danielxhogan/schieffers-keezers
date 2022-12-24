@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "make-db": "cd utils && node makeDb.js",
     "heroku-postbuild": "cd client && npm i && npm run build"
   },
   "author": "Daniel Hogan",
