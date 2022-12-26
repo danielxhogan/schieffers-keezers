@@ -10,7 +10,7 @@ router.get('/check', authorization, async (req, res) => {
   // and checks if its equal to the value stored in the environment variable ADMIN_USER_ID
 
   try {
-    if (req.user_id === process.env.ADMIN_USER_ID) {
+    if (req.user_id == process.env.ADMIN_USER_ID) {
       res.json(true);
     } else {
       res.send(false);
