@@ -11,50 +11,60 @@ try {
   });
 
 
+  // MAKE TABLES
+// *****************************************************************************************
   pool.query('create table if not exists users(\
-    user_id int primary key\
-    first_name text\
-    last_name text\
-    email text\
+    user_id serial primary key,\
+    first_name text,\
+    last_name text,\
+    email text,\
     password text\
     )');
 
   pool.query('create table if not exists addresses(\
-    address_id int primary key\
-    street text\
-    city text\
-    state text\
-    zip int\
+    address_id serial primary key,\
+    street text,\
+    city text,\
+    state text,\
+    zip int,\
     user_id int references users(user_id)\
     )');
 
 
   pool.query('create table if not exists categories(\
-    category_id int primary key\
+    category_id serial primary key,\
     name text\
   )');
 
   pool.query('create table if not exists products(\
-    product_id int primary key\
-    name text\
-    description text\
-    price numeric\
+    product_id serial primary key,\
+    name text,\
+    description text,\
+    price numeric,\
     category_id int references categories(category_id)\
   )');
 
   pool.query('create table if not exists images(\
-    image_id int primary key\
-    name text\
+    image_id serial primary key,\
+    name text,\
     product_id int references products(product_id)\
     )');
 
 
   pool.query('create table if not exists cart(\
-    cart_item_id int primary key\
-    user_id int refrences users(user_id)\
-    product_id int references products(product_id)\
-    qty\
+    cart_item_id serial primary key,\
+    user_id int references users(user_id),\
+    product_id int references products(product_id),\
+    qty int\
     )');
+
+// INSERT PRODUCT DATA
+// *****************************************************************************************
+pool.query('insert into categories(name) values("freezer")');
+pool.query('insert into categories(name) values("tapkit")');
+pool.query('insert into categories(name) values("drippan")');
+pool.query('insert into categories(name) values("thermostat")');
+pool.query('insert into categories(name) values("c02tank")');
 
   pool.end();
 
