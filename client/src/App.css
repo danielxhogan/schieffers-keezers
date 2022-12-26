@@ -1,11 +1,14 @@
 :root {
   --light-grey: #E0E0E0;
   --lighter-grey: #E8E8E8;
+  --header-height: 75px;
 }
 
 .main-header {
-  /* position: fixed; */
+  position: fixed;
+  z-index: 1;
   width: 100%;
+  height: var(--header-height);
   display: flex;
   justify-content: space-between;
   padding: 1% 2% 0 2%;
@@ -44,6 +47,7 @@ body {
 
 .body {
   padding: 3% 5%;
+  padding-top: var(--header-height);
 }
 
 .login-register {
