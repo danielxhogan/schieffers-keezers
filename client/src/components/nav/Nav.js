@@ -9,9 +9,11 @@ const Nav = (props) => {
   // The Nav component gets isAdmin and setIsAdmin from App.
   // If the user has administrative priveliges, they will have access
   // to the admin page.
+  
+  console.log(`isAdmin: ${props.isAdmin}`);
 
   return <>
-    <header className='main-header'>
+    <header className='main-header justify-content-around'>
 
       <nav className='d-flex'>
         <h3>SK</h3>
