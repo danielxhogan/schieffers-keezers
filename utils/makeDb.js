@@ -60,11 +60,22 @@ try {
 
 // INSERT PRODUCT DATA
 // *****************************************************************************************
-pool.query('insert into categories(name) values("freezer")');
-pool.query('insert into categories(name) values("tapkit")');
-pool.query('insert into categories(name) values("drippan")');
-pool.query('insert into categories(name) values("thermostat")');
-pool.query('insert into categories(name) values("c02tank")');
+// pool.query('insert into categories(name) values($1)', ['freezer']);
+// pool.query('insert into categories(name) values($1)', ['tapkit']);
+// pool.query('insert into categories(name) values($1)', ['drippan']);
+// pool.query('insert into categories(name) values($1)', ['thermostat']);
+// pool.query('insert into categories(name) values($1)', ['c02tank']);
+
+// CHECK THE ID FOR THE CATEGORIES, MAKE SURE FRIDGES HAVE THE CORRECT CATEGORY NUMBER
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Small Fridge', '10 sq ft internal volume', 300, 2]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Medium Fridge', '12 sq ft internal volume', 500, 2]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Large Fridge', '15 sq ft internal volume', 700, 2]);
 
   pool.end();
 
