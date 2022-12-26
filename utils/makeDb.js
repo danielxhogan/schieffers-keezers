@@ -58,7 +58,7 @@ try {
     qty int\
     )');
 
-// INSERT PRODUCT DATA
+// INSERT CATEGORIES
 // *****************************************************************************************
 // pool.query('insert into categories(name) values($1)', ['freezer']);
 // pool.query('insert into categories(name) values($1)', ['tapkit']);
@@ -66,16 +66,102 @@ try {
 // pool.query('insert into categories(name) values($1)', ['thermostat']);
 // pool.query('insert into categories(name) values($1)', ['c02tank']);
 
+
+// INSERT PRODUCT DATA
+// *****************************************************************************************
 // CHECK THE ID FOR THE CATEGORIES, MAKE SURE FRIDGES HAVE THE CORRECT CATEGORY NUMBER
 
 // pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
-// ['Small Fridge', '10 sq ft internal volume', 300, 2]);
+// ['Small Freezer', '10 sq ft internal volume', 300, 2]);
 
 // pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
-// ['Medium Fridge', '12 sq ft internal volume', 500, 2]);
+// ['Medium Freezer', '12 sq ft internal volume', 500, 2]);
 
 // pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
-// ['Large Fridge', '15 sq ft internal volume', 700, 2]);
+// ['Large Freezer', '15 sq ft internal volume', 700, 2]);
+
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Single Tapkit', 'Tapkit for one head', 35, 1]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Double Tapkit', 'Tapkit for two heads', 60, 1]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Triple Tapkit', 'Tapkit for three heads', 85, 1]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Quad Tapkit', 'Tapkit for four heads', 100, 1]);
+
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Small Drippan', '12 in wide drip pan', 15, 4]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Large Drippan', '18 in wide drip pan', 25, 4]);
+
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['External Theromostat', 'Power breaker that monitors the freezer temp', 45, 3]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Internal Theromostat', 'Installed thermostat for controlling the freezer temp', 80, 3]);
+
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Small C02 Tank', '10 lb c02 tank', 75, 5]);
+
+// pool.query('insert into products(name, description, price, category_id) values($1, $2, $3, $4)',
+// ['Large C02 Tank', '15 lb c02 tank', 110, 5]);
+
+
+// INSERT IMAGE DATA
+// *****************************************************************************************
+// CHECK THE PRODUCT ID FOR EACT PRODUCT, MAKE SURE THE IMAGE IS ASSIGNED TO CORRECT PRODUCT
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['small-freezer.jpg', 14]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['medium-freezer.jpg', 12]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['large-freezer.jpg', 13]);
+
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['single-tap-kit.jpg', 4]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['double-tap-kit.jpg', 5]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['triple-tap-kit.jpg', 6]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['quad-tap-kit.jpg', 7]);
+
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['external-thermostat.jpg', 10]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['internal-thermostat.jpg', 11]);
+
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['small-drip-pan.jpg', 8]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['large-drip-pan.jpg', 9]);
+
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['small-c02-tank.jpg', 15]);
+
+// pool.query('insert into images(name, product_id) values($1, $2)',
+// ['large-c02-tank.jpg', 16]);
+
 
   pool.end();
 
