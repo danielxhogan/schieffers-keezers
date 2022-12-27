@@ -10,8 +10,6 @@ const Nav = (props) => {
   // If the user has administrative priveliges, they will have access
   // to the admin page.
   
-  console.log(`isAdmin: ${props.isAdmin}`);
-
   return <>
     <header className='main-header justify-content-around'>
 
