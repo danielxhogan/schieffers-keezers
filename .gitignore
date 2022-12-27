@@ -2,3 +2,7 @@ node_modules
 .env
 build
 package-lock.json
+
+BL_proxy
+*.blend
+*.mkv
