@@ -8,7 +8,7 @@ router.get('/all', async (req, res) => {
 
   try {
     const results = await pool.query(
-      'select products.name, description, price, images.name as image, categories.name as category \
+      'select products.product_id, products.name, description, price, images.name as image, categories.name as type \
        from products \
        join images \
        on products.product_id = images.product_id \
