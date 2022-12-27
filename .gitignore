@@ -6,3 +6,5 @@ package-lock.json
 BL_proxy
 *.blend
 *.mkv
+
+.vscode
